@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     public int Speed;
     public int MaxHp;
     int hp;
+    public float camera_speed;
+
     public int Hp
     {
         get { return hp; }
@@ -57,7 +59,7 @@ public class Player : MonoBehaviour
     }
     private void LateUpdate()
     {
-        Camera.transform.position = transform.position;
+        Camera_move();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -135,6 +137,13 @@ public class Player : MonoBehaviour
         if (Hp == 0)
             SceneManager.LoadScene("Main");
     }
+
+    void Camera_move()
+    {
+        Vector3 pos = Vector3.Lerp(Camera.transform.position, transform.position, camera_speed);
+        Camera.transform.position = pos;
+    }
+
     IEnumerator HitAnimation()
     {
         Invincibility = true;
