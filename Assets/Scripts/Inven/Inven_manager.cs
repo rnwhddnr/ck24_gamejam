@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Inven_manager : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class Inven_manager : MonoBehaviour
 
     private void inven_control()
     {
+        if (SceneManager.GetActiveScene().name == "Main")
+            return;
+
         if (Input.GetKeyDown(GameManager.instance.OperationKey["Inventory"]))
         {
             if (inven.activeSelf)
