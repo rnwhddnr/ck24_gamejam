@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4006830249581925641}
   - component: {fileID: 4006830249581925640}
   - component: {fileID: 4006830249581925647}
+  - component: {fileID: 1597349112}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -124,6 +125,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1597349112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4006830249581925646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47dd7c4ef9fe92840bb593c0bb270e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: 1ec7413d3caf93c4db86083cc39025e9, type: 2}
+  move_speed: 0.5
 --- !u!1 &4006830250166011584
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,4 +186,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.55

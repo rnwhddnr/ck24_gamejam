@@ -7,20 +7,25 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    Camera Camera;
-    Canvas canvas;
-    GameManager GM;
-    Rigidbody2D RG;
-    bool Invincibility;
-    [SerializeField] SpriteRenderer SR;
+    private bool Invincibility;
     public float InvincibilityTime;
+    
     public int JumpCount = 1;
     public int MaxJumpCount = 1;
-    bool NowJump;
+    private bool NowJump;
+    
     public int Speed;
+    
     public int MaxHp;
-    int hp;
+    private int hp;
+    
     public float camera_speed;
+
+    [SerializeField] SpriteRenderer SR;
+    [SerializeField] Canvas canvas;
+    Camera Camera;
+    GameManager GM;
+    Rigidbody2D RG;
 
     public int Hp
     {
@@ -39,7 +44,6 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         Camera = Camera.main;
-        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         GM = GameManager.instance;
         RG = GetComponent<Rigidbody2D>();
         for (int i = 0; i < MaxHp; i++)

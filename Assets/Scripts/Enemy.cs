@@ -4,10 +4,28 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public item item;
+    [Space(10f)]
     public float move_speed;
-
+   
     private float next_move;
     private Rigidbody2D rigid;
+    private int hp;
+    public int HP
+    {
+        get { return hp; }
+        set
+        {
+            if (hp != value)
+            {
+                if (value <= 0)
+                    Destroy_enemy();
+                else
+                    hp = value;
+            }
+        }
+
+    }
 
     private void Awake()
     {
@@ -19,6 +37,12 @@ public class Enemy : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+    }
+
+    private void Destroy_enemy()
+    {
+        Inven_manager.instance.Add_new_item(item);
+        Destroy(gameObject);
     }
 
     private void Move()
