@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class Player : MonoBehaviour
     
     public int MaxHp;
     private int hp;
+    public int Atk;
+    bool Attacked;
+
     bool Roll;
     
     public float camera_speed;
@@ -28,6 +32,9 @@ public class Player : MonoBehaviour
     Camera Camera;
     GameManager GM;
     Rigidbody2D RG;
+    [SerializeField] GameObject WeaponCenter;
+    public PolygonCollider2D PolygonCollider;
+    Animator Animator;
 
     public int Hp
     {
@@ -48,6 +55,7 @@ public class Player : MonoBehaviour
         Camera = Camera.main;
         GM = GameManager.instance;
         RG = GetComponent<Rigidbody2D>();
+        Animator = GetComponent<Animator>();
         for (int i = 0; i < MaxHp; i++)
         {
             GameObject OBJ = Instantiate(HpbarPrefab, canvas.transform);
@@ -109,7 +117,21 @@ public class Player : MonoBehaviour
     }
     void Attack()
     {
-
+        if (Input.GetMouseButtonDown(0) && !Attacked)
+        {
+            Animator.SetTrigger("Attack");
+        }
+    }
+    void AttackStart()
+    {
+        Attacked = true;
+        PolygonCollider.enabled = true;
+    }
+    void AttackEnd()
+    {
+        Attacked = false;
+        PolygonCollider.enabled = false;
+        Animator.SetTrigger("End");
     }
     void Move()
     {
@@ -118,10 +140,12 @@ public class Player : MonoBehaviour
         if (Input.GetKey(GM.OperationKey["RightMove"]))
         {
             XMove += 1 * Speed;
+            transform.eulerAngles = new Vector3(0, 0, 0);
         }
         else if (Input.GetKey(GM.OperationKey["LeftMove"]))
         {
             XMove -= 1 * Speed;
+            transform.eulerAngles = new Vector3(0, 180, 0);
         }
         RG.velocity = new Vector2(XMove, RG.velocity.y);
         if (Input.GetKeyDown(GM.OperationKey["Jump"]))

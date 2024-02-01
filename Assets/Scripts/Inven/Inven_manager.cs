@@ -32,10 +32,7 @@ public class Inven_manager : MonoBehaviour
 
         if (Input.GetKeyDown(GameManager.instance.OperationKey["Inventory"]))
         {
-            if (inven.activeSelf)
-                inven.SetActive(false);
-            else
-                inven.SetActive(true);
+            inven.SetActive(!inven.activeSelf);
         }
     }
 

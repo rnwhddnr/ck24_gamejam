@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
    
     private float next_move;
     private Rigidbody2D rigid;
-    private int hp;
+    public int hp;
     public int Attack = 1;
     public int HP
     {
@@ -56,7 +56,16 @@ public class Enemy : MonoBehaviour
         Inven_manager.instance.Add_new_item(item);
         Destroy(gameObject);
     }
-
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            Player player = collision.transform.root.GetComponent<Player>();
+            HP -= player.Atk;
+            player.PolygonCollider.enabled = false;
+            Debug.Log("HIT");
+        }
+    }
     private void Move()
     {
         rigid.velocity = new Vector2(next_move * move_speed, rigid.velocity.y);

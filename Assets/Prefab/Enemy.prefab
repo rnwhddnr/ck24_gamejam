@@ -139,6 +139,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 1ec7413d3caf93c4db86083cc39025e9, type: 2}
   move_speed: 0.5
+  hp: 10
+  Attack: 1
+  CommonMob: 1
 --- !u!1 &4006830250166011584
 GameObject:
   m_ObjectHideFlags: 0
