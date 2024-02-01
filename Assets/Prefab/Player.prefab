@@ -47,12 +47,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0294da167f2a92d4d9c2c0a0574aafe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SR: {fileID: 9163463560955187517}
   InvincibilityTime: 1
   JumpCount: 1
   MaxJumpCount: 1
+  JumpPower: 5
   Speed: 5
   MaxHp: 5
+  camera_speed: 0
+  SR: {fileID: 9163463560955187517}
+  canvas: {fileID: 0}
   Hpbars: []
   HpbarPrefab: {fileID: 6024168292320739311, guid: 2a0f50498252b974abd3554aeed97346, type: 3}
 --- !u!50 &9163463560267334239
@@ -71,7 +74,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: cb4eb4f832cbfd74aafc938dbfd57344, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 0
   m_CollisionDetection: 0

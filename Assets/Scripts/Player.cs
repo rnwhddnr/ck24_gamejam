@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     
     public int JumpCount = 1;
     public int MaxJumpCount = 1;
+    public int JumpPower = 5;
     private bool NowJump;
     
     public int Speed;
@@ -68,7 +69,7 @@ public class Player : MonoBehaviour
     {
         if (collision.transform.CompareTag("Block") && NowJump)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.52f, 1 << 3);
+            RaycastHit2D hit = Physics2D.BoxCast(transform.position, new Vector2(1, 1), 0, Vector2.down, 0.52f, 1 << 3);
             Debug.DrawRay(transform.position, Vector2.down * 0.52f, Color.red);
             if (hit.collider != null && hit.transform.CompareTag("Block"))
             {
@@ -102,7 +103,7 @@ public class Player : MonoBehaviour
         {
             if (JumpCount > 0)
             {
-                RG.velocity += new Vector2(0, 5);
+                RG.velocity += new Vector2(0, JumpPower);
                 JumpCount--;
                 NowJump = true;
             }
