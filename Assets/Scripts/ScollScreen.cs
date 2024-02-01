@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SaveLoadScreen : MonoBehaviour
+public class SettingScreen : MonoBehaviour
 {
     RectTransform RT;
     Scrollbar SB;
+    [SerializeField] float Max;
+    [SerializeField] float Min;
     private void Start()
     {
         RT = transform.GetChild(0).GetComponent<RectTransform>();
@@ -15,14 +17,14 @@ public class SaveLoadScreen : MonoBehaviour
     void Update()
     {
         Scroll();
-        SB.value = RT.anchoredPosition.y / 1900f;
+        SB.value = RT.anchoredPosition.y / Max;
     }
     void Scroll()
     {
         float scoll = Input.GetAxis("Mouse ScrollWheel");
         if (scoll > 0)
         {
-            if (RT.anchoredPosition.y <= 0)
+            if (RT.anchoredPosition.y <= Min)
             {
                 RT.anchoredPosition = new Vector2(0, 0);
                 return;
@@ -34,7 +36,7 @@ public class SaveLoadScreen : MonoBehaviour
         }
         else if (scoll < 0)
         {
-            if (RT.anchoredPosition.y >= 1900)
+            if (RT.anchoredPosition.y >= Max)
             {
                 return;
             }
@@ -46,6 +48,6 @@ public class SaveLoadScreen : MonoBehaviour
     }
     public void ScrollBar()
     {
-        RT.anchoredPosition = new Vector2(0, 1900f * SB.value);
+        RT.anchoredPosition = new Vector2(0, Max * SB.value);
     }
 }

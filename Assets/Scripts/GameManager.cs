@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public Dictionary<string, KeyCode> OperationKey = new Dictionary<string, KeyCode>();
+    public int[] Width = { 1920, 1600, 1280 };
+    public int[] Height = { 1080, 900, 800 };
+    public int NowResolution;
+    public bool WindowScreen;
     private void Awake()
     {
         instance = this;

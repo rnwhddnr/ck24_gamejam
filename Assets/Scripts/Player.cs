@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -83,7 +82,7 @@ public class Player : MonoBehaviour
         {
             if (Invincibility)
                 return;
-            StartCoroutine(HitAnimation());
+            StartCoroutine(HitAnimation(collision.transform.GetComponent<Enemy>()));
         }
     }
     void Move()
@@ -138,7 +137,7 @@ public class Player : MonoBehaviour
                 Hpbars[i].SetActive(false);
             }
         }
-        if (Hp == 0)
+        if (Hp <= 0)
             SceneManager.LoadScene("Main");
     }
 
@@ -148,7 +147,7 @@ public class Player : MonoBehaviour
         Camera.transform.position = pos;
     }
 
-    IEnumerator HitAnimation()
+    IEnumerator HitAnimation(Enemy enemy)
     {
         Invincibility = true;
         Hp -= 1;
