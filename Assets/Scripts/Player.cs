@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         {
             if (Invincibility)
                 return;
-            StartCoroutine(HitAnimation(collision.transform.GetComponent<Enemy>()));
+            StartCoroutine(HitAnimation(collision.transform.parent.GetComponent<Enemy>()));
         }
     }
     IEnumerator Rolling(Vector3 Pos)
@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
         Roll = true;
         Vector2 Dir = Pos - transform.position;
         int dir=System.Math.Sign(Dir.x);
-        RG.velocity = new Vector2(Speed * 2 * dir, RG.velocity.y);
+        RG.velocity = new Vector2(Speed * 2.5f * dir, RG.velocity.y);
         HitRange.enabled = false;
         yield return new WaitForSeconds(0.2f);
         HitRange.enabled = true;
@@ -176,7 +176,7 @@ public class Player : MonoBehaviour
     IEnumerator HitAnimation(Enemy enemy)
     {
         Invincibility = true;
-        Hp -= 1;
+        Hp -= enemy.Attack;
         float T = 0;
         float Alpha = 1;
         while (T < InvincibilityTime)

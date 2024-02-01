@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     private float next_move;
     private Rigidbody2D rigid;
     private int hp;
+    public int Attack = 1;
     public int HP
     {
         get { return hp; }
@@ -26,19 +27,30 @@ public class Enemy : MonoBehaviour
         }
 
     }
-
+    [SerializeField] bool CommonMob = true;
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
 
         Choose_next_move();
+        if (CommonMob)
+            StartCoroutine(CommonMobAI());
     }
-
+    IEnumerator CommonMobAI()
+    {
+        while (true) 
+        {
+            yield return null;
+            Move();
+        }
+        //보스도Enemy.cs의 스탯들좀 쓰기위해 분리시켰어요.
+    }
+    /*
     private void FixedUpdate()
     {
         Move();
     }
-
+    */
     private void Destroy_enemy()
     {
         Inven_manager.instance.Add_new_item(item);
