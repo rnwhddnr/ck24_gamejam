@@ -18,9 +18,11 @@ public class Player : MonoBehaviour
     
     public int MaxHp;
     private int hp;
+    bool Roll;
     
     public float camera_speed;
 
+    [SerializeField] BoxCollider2D HitRange;
     [SerializeField] SpriteRenderer SR;
     [SerializeField] Canvas canvas;
     Camera Camera;
@@ -58,8 +60,14 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        //±¸¸£±â
+        if (Input.GetMouseButtonDown(1)&&!Roll)
+            StartCoroutine(Rolling(Camera.ScreenToWorldPoint(Input.mousePosition)));
+        if (Roll)
+            return;
         Move();
         Interact();
+        Attack();
     }
     private void LateUpdate()
     {
@@ -85,6 +93,23 @@ public class Player : MonoBehaviour
                 return;
             StartCoroutine(HitAnimation(collision.transform.GetComponent<Enemy>()));
         }
+    }
+    IEnumerator Rolling(Vector3 Pos)
+    {
+        Roll = true;
+        Vector2 Dir = Pos - transform.position;
+        int dir=System.Math.Sign(Dir.x);
+        RG.velocity = new Vector2(Speed * 2 * dir, RG.velocity.y);
+        HitRange.enabled = false;
+        yield return new WaitForSeconds(0.2f);
+        HitRange.enabled = true;
+        RG.velocity = new Vector2(0, RG.velocity.y);
+        yield return new WaitForSeconds(0.1f);
+        Roll = false;
+    }
+    void Attack()
+    {
+
     }
     void Move()
     {

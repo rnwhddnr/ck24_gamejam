@@ -54,6 +54,7 @@ MonoBehaviour:
   Speed: 5
   MaxHp: 5
   camera_speed: 0
+  HitRange: {fileID: 9163463560955187514}
   SR: {fileID: 9163463560955187517}
   canvas: {fileID: 0}
   Hpbars: []
