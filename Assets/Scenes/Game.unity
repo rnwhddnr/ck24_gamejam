@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8ce923a26aa8c94f9725c51a9d269c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {x: 50, y: 10}
+  Target: {x: 46, y: 10}
 --- !u!114 &700887958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1137,12 +1137,24 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5573316420402470328, guid: d72e3f201c24e444ca19c184313717aa, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 1396468538117744583, guid: 4cb32e0a89dbaa1419b74837654452fd, type: 2}
     - target: {fileID: 8161633033781968013, guid: d72e3f201c24e444ca19c184313717aa, type: 3}
       propertyPath: m_text
       value: F
       objectReference: {fileID: 0}
     - target: {fileID: 8161633033781968013, guid: d72e3f201c24e444ca19c184313717aa, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8161633033781968013, guid: d72e3f201c24e444ca19c184313717aa, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1396468538117744583, guid: 4cb32e0a89dbaa1419b74837654452fd, type: 2}
+    - target: {fileID: 8161633033781968013, guid: d72e3f201c24e444ca19c184313717aa, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1798,12 +1810,24 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5573316420402470328, guid: d72e3f201c24e444ca19c184313717aa, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 1396468538117744583, guid: 4cb32e0a89dbaa1419b74837654452fd, type: 2}
     - target: {fileID: 8161633033781968013, guid: d72e3f201c24e444ca19c184313717aa, type: 3}
       propertyPath: m_text
       value: F
       objectReference: {fileID: 0}
     - target: {fileID: 8161633033781968013, guid: d72e3f201c24e444ca19c184313717aa, type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8161633033781968013, guid: d72e3f201c24e444ca19c184313717aa, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1396468538117744583, guid: 4cb32e0a89dbaa1419b74837654452fd, type: 2}
+    - target: {fileID: 8161633033781968013, guid: d72e3f201c24e444ca19c184313717aa, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2059,10 +2083,22 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 458697406869875805, guid: 38d44c0551144f0499a21fe97c3b1143, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1396468538117744583, guid: 4cb32e0a89dbaa1419b74837654452fd, type: 2}
+    - target: {fileID: 458697406869875805, guid: 38d44c0551144f0499a21fe97c3b1143, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3882915794867541540, guid: 38d44c0551144f0499a21fe97c3b1143, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4199053725085797736, guid: 38d44c0551144f0499a21fe97c3b1143, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 1396468538117744583, guid: 4cb32e0a89dbaa1419b74837654452fd, type: 2}
     - target: {fileID: 6618335249603231522, guid: 38d44c0551144f0499a21fe97c3b1143, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2114,6 +2150,14 @@ PrefabInstance:
     - target: {fileID: 8576855807832587973, guid: 38d44c0551144f0499a21fe97c3b1143, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8576855808550825229, guid: 38d44c0551144f0499a21fe97c3b1143, type: 3}
+      propertyPath: strings.Array.data[1]
+      value: "\uD14C\uC2A4\uD2B8"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8576855808550825229, guid: 38d44c0551144f0499a21fe97c3b1143, type: 3}
+      propertyPath: strings.Array.data[2]
+      value: '!@#$$%^'
       objectReference: {fileID: 0}
     - target: {fileID: 8576855808550825231, guid: 38d44c0551144f0499a21fe97c3b1143, type: 3}
       propertyPath: m_TagString
