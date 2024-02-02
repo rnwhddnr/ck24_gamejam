@@ -12,7 +12,8 @@ public class Interaction : MonoBehaviour
     {
         if (interact != null)
         {
-            text.enabled = false;
+            if (text != null)
+                text.enabled = false;
             interact();
         }
     }
@@ -20,6 +21,9 @@ public class Interaction : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
+            if (text == null)
+                return;
+
             text.text = GameManager.instance.OperationKey["Interaction"].ToString();
             text.enabled = true;
         }
@@ -27,6 +31,11 @@ public class Interaction : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.transform.CompareTag("Player"))
+        {
+            if (text == null)
+                return;
+
             text.enabled = false;
+        }
     }
 }
