@@ -9,4 +9,5 @@ public class item : ScriptableObject
     public string Item_Name;
     [TextArea(3, 5)] public string Item_Description;
     public Image Item_Icon;
+    public int coin;
 }

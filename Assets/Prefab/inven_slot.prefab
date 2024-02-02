@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1413477582250524180}
   - component: {fileID: 144789112767535316}
   - component: {fileID: 3408076917232076165}
-  - component: {fileID: 56737301}
+  - component: {fileID: 7946317610371528644}
   m_Layer: 5
   m_Name: inven_slot
   m_TagString: Untagged
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &56737301
+--- !u!114 &7946317610371528644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,3 +89,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a208a610d8f5d304b81a46362de351e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Tag_name: Food

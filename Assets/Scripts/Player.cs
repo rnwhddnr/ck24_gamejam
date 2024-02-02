@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 {
     private bool Invincibility;
     public float InvincibilityTime;
-    
+
     public int JumpCount = 1;
     public int MaxJumpCount = 1;
     public int JumpPower = 5;
@@ -68,6 +68,9 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        if (!GM.Can_interact)
+            return;
+
         //±¸¸£±â
         if (Input.GetMouseButtonDown(1)&&!Roll)
             StartCoroutine(Rolling(Camera.ScreenToWorldPoint(Input.mousePosition)));
@@ -171,7 +174,9 @@ public class Player : MonoBehaviour
                 Distance.Add(Vector2.Distance(transform.position, hits[i].transform.position));
             }
             int Index = Distance.IndexOf(Distance.Min());
-            hits[Index].transform.GetChild(0).GetComponent<Interaction>().InteractStart();
+
+            if (hits[Index].transform != null)
+                hits[Index].transform.GetChild(0).GetComponent<Interaction>().InteractStart();
         }
     }
     void HpRefresh()
@@ -194,7 +199,7 @@ public class Player : MonoBehaviour
     void Camera_move()
     {
         Vector3 pos = Vector3.Lerp(Camera.transform.position, transform.position, camera_speed);
-        Camera.transform.position = pos;
+        Camera.transform.position = new Vector3(pos.x, pos.y, -10f);
     }
 
     IEnumerator HitAnimation(Enemy enemy)
