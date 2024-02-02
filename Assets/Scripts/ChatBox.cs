@@ -33,6 +33,14 @@ public class ChatBox : MonoBehaviour
         textMesh.text = strings[Count];
         Count++;
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.transform.CompareTag("Player"))
+        {
+            Destroy(OBJ);
+            Count = 0;
+        }
+    }
     IEnumerator Disable()
     {
         yield return new WaitForSeconds(3f);

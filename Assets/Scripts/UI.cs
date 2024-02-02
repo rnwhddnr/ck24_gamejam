@@ -28,9 +28,9 @@ public class UI : MonoBehaviour
     {
         GameManager.instance.WindowScreen = !GameManager.instance.WindowScreen;
         if (GameManager.instance.WindowScreen)
-            text.text = "FullScreen";
+            text.text = "전체화면";
         else
-            text.text = "WIndow\nScreen";
+            text.text = "창 모드";
     }
     public void ResolutionSetting(int Value)
     {
