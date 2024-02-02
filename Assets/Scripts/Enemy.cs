@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public item item;
+    [SerializeField] GameObject Item;
     [Space(10f)]
     public float move_speed;
    
@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
     */
     private void Destroy_enemy()
     {
-        Inven_manager.instance.Add_new_item(item);
+        Instantiate(Item, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
     private void OnTriggerStay2D(Collider2D collision)
