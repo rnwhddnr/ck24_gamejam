@@ -1894,7 +1894,7 @@ PrefabInstance:
     - target: {fileID: 9163463560267334236, guid: b44011315fe97fd48afb3f239696c613, type: 3}
       propertyPath: canvas
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 9163463560114821511}
     - target: {fileID: 9163463560267334236, guid: b44011315fe97fd48afb3f239696c613, type: 3}
       propertyPath: camera_speed
       value: 0.01
@@ -1909,3 +1909,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44011315fe97fd48afb3f239696c613, type: 3}
+--- !u!223 &9163463560114821511 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 3807769408000591449, guid: b44011315fe97fd48afb3f239696c613, type: 3}
+  m_PrefabInstance: {fileID: 9163463560114821510}
+  m_PrefabAsset: {fileID: 0}

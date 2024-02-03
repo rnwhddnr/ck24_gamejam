@@ -9,11 +9,18 @@ public class Shop : MonoBehaviour
     [Space(10f)]
 
     public List<Recipe> recipes = new List<Recipe>();
+    [SerializeField] List<item> items = new List<item>();
+    
 
     public List<inven_slot> nomal_slot = new List<inven_slot>();
     public List<inven_slot> food_slot = new List<inven_slot>();
     public inven_slot Result_slot;
     private Transform inven;
+
+    private void Start()
+    {
+        Inven_manager.instance.shop = this;
+    }
 
     public void Start_shop()
     {
@@ -44,44 +51,29 @@ public class Shop : MonoBehaviour
         rect.sizeDelta = new Vector2(1920, 1080);
     }
 
-    public void Set_nomal_slot(item item)
+    public void Set_item(item item)
     {
-        for(int i = 0;i < nomal_slot.Count; i++)
+        items.Add(item);
+        Butten_cook();
+    }
+
+    public void delet_item(item item)
+    {
+        if (items.Contains(item))
         {
-            if (nomal_slot[i].GetComponentInChildren<inven_item>() == null)
-            {
-                GameObject new_item = Inven_manager.instance.Spawn_new_item(item, nomal_slot[i]);
-                new_item.GetComponent<inven_item>().is_cook_item = true;
-                return;
-            }
+            items.Remove(item);
         }
     }
 
     public void Butten_cook()
     {
-        List<item> items = new List<item>();
-        for (int i = 0; i < nomal_slot.Count; i++)
-        {
-            if (nomal_slot[i].GetComponentInChildren<inven_item>() != null)
-            {
-                items.Add(nomal_slot[i].GetComponentInChildren<inven_item>().item);
-            }
-        }
-
-        for (int i = 0; i < nomal_slot.Count; i++)
-        {
-            if (nomal_slot[i].GetComponentInChildren<inven_item>() != null)
-            {
-                Destroy(nomal_slot[i].GetComponentInChildren<inven_item>().gameObject);
-            }
-        }
-
         foreach (Recipe rec in recipes)
         {
             if (rec.Get_item(items.ToArray()) != null)
             {
                 GameObject new_item_obj = Inven_manager.instance.Spawn_new_item(rec.Get_item(items.ToArray()), Result_slot);
                 new_item_obj.tag = "Food";
+                new_item_obj.GetComponent<inven_item>().is_result_slot = true;
 
                 return;
             }
@@ -102,5 +94,14 @@ public class Shop : MonoBehaviour
         }
 
         return result;
+    }
+
+    public void dest_nomal_slot()
+    {
+        for(int i = 0; i < nomal_slot.Count; i++)
+        {
+            if (nomal_slot[i].GetComponentInChildren<inven_item>() != null)
+                Destroy(nomal_slot[i].GetComponentInChildren<inven_item>().gameObject);
+        }
     }
 }

@@ -15,6 +15,7 @@ public class Inven_manager : MonoBehaviour
     [Space(10f)]
 
     public GameObject Item_prefeb;
+    public Shop shop;
 
     private int coin;
     public int Coin
