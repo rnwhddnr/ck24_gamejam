@@ -101,7 +101,7 @@ public class Shop : MonoBehaviour
         for(int i = 0; i < nomal_slot.Count; i++)
         {
             if (nomal_slot[i].GetComponentInChildren<inven_item>() != null)
-                Destroy(nomal_slot[i].GetComponentInChildren<inven_item>().gameObject);
+                nomal_slot[i].GetComponentInChildren<inven_item>().Count -= 1;
         }
     }
 }

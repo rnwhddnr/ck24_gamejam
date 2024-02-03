@@ -61,8 +61,9 @@ public class inven_item : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
 
     public void Set_food_slot(List<RaycastResult> raycastResults)
     {
+        Debug.Log(raycastResults);
         foreach (RaycastResult res in raycastResults)
-        {
+        { 
             if (res.gameObject.GetComponent<inven_slot>() != null)
             {
                 Inven_manager.instance.Spawn_new_item(item, res.gameObject.GetComponent<inven_slot>());
