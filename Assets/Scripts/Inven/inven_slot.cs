@@ -7,6 +7,7 @@ using TMPro;
 public class inven_slot : MonoBehaviour, IDropHandler
 {
     [SerializeField] string Tag_name;
+    public bool is_cook_slot;
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -17,5 +18,11 @@ public class inven_slot : MonoBehaviour, IDropHandler
         else
             if (Drop_item.CompareTag(Tag_name))
                 Drop_item.Parent_After_Drag = transform;
+    }
+
+    public void Set_item(inven_item item)
+    {
+        if (is_cook_slot)
+            FindObjectOfType<Shop>().Butten_cook();
     }
 }

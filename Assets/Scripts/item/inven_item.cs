@@ -14,8 +14,9 @@ public class inven_item : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     [HideInInspector] public Transform Parent_After_Drag;
 
     private Shop shop;
-    [HideInInspector] public bool is_cook_item;
+    private bool is_cook_item;
     private bool pointer;
+    public bool is_result_slot;
 
     private int count = 0;
     public int Count
@@ -41,18 +42,33 @@ public class inven_item : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             if (shop == null)
                 shop = FindObjectOfType<Shop>();
 
-            if (Input.GetMouseButtonDown(1) && pointer)
+            if (Input.GetMouseButton(0) && pointer && Input.GetMouseButtonDown(1))
             {
-                if (!is_cook_item)
-                {
-                    shop.Set_nomal_slot(item);
-                    Count -= 1;
-                }
-                else
-                {
-                    Inven_manager.instance.Add_new_item(item);
-                    Destroy(gameObject);
-                }
+                Set_food_slot(mouse_position_raycast_result());
+            }
+        }
+    }
+    private List<RaycastResult> mouse_position_raycast_result()
+    {
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = Input.mousePosition;
+
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, raycastResults);
+
+        return raycastResults;
+    }
+
+    public void Set_food_slot(List<RaycastResult> raycastResults)
+    {
+        Debug.Log(raycastResults);
+        foreach (RaycastResult res in raycastResults)
+        { 
+            if (res.gameObject.GetComponent<inven_slot>() != null)
+            {
+                Inven_manager.instance.Spawn_new_item(item, res.gameObject.GetComponent<inven_slot>());
+                res.gameObject.GetComponent<inven_slot>().Set_item(this);
+                Count -= 1;
             }
         }
     }
@@ -72,7 +88,13 @@ public class inven_item : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     {
         Item_image.raycastTarget = false;
         Parent_After_Drag = transform.parent;
-        transform.SetParent(transform.parent.parent.parent);
+        transform.SetParent(transform.parent.parent.parent.parent);
+
+        if (is_result_slot)
+        {
+            Inven_manager.instance.shop.dest_nomal_slot();
+            is_result_slot = false;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -86,6 +108,17 @@ public class inven_item : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         transform.position = Parent_After_Drag.position;
         transform.SetParent(Parent_After_Drag);
         transform.SetAsFirstSibling();
+
+        if (transform.parent.GetComponent<inven_slot>().is_cook_slot)
+        {
+            is_cook_item = true;
+            Inven_manager.instance.shop.Set_item(item);
+        }
+        else if (!transform.parent.GetComponent<inven_slot>().is_cook_slot && is_cook_item)
+        {
+            Inven_manager.instance.shop.delet_item(item);
+            is_cook_item = false;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
