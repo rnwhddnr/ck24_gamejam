@@ -73,7 +73,8 @@ public class Player : MonoBehaviour
             return;
 
         //±¸¸£±â
-        if (Input.GetMouseButtonDown(1)&&!Roll)
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, new Vector2(1, 1), 0, Vector2.down, 0.52f, 1 << 3);
+        if (Input.GetMouseButtonDown(1) && !Roll && hit.collider != null)
             StartCoroutine(Rolling(Camera.ScreenToWorldPoint(Input.mousePosition)));
         if (Roll)
             return;
