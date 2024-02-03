@@ -405,7 +405,7 @@ MonoBehaviour:
   camera_speed: 1
   HitRange: {fileID: 9163463560955187514}
   SR: {fileID: 9163463560955187517}
-  canvas: {fileID: 0}
+  canvas: {fileID: 3807769408000591449}
   WeaponCenter: {fileID: 5744319030656031836}
   PolygonCollider: {fileID: 1591852768541058902}
   Hpbars: []

@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
         GM = GameManager.instance;
         RG = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
+        canvas = transform.GetChild(2).GetComponent<Canvas>();
         for (int i = 0; i < MaxHp; i++)
         {
             GameObject OBJ = Instantiate(HpbarPrefab, canvas.transform);
@@ -198,7 +199,7 @@ public class Player : MonoBehaviour
 
     void Camera_move()
     {
-        Vector3 pos = Vector3.Lerp(Camera.transform.position, transform.position, camera_speed);
+        Vector3 pos = Vector3.Lerp(Camera.transform.position, transform.position + (Vector3.up * 2), camera_speed);
         Camera.transform.position = new Vector3(pos.x, pos.y, -10f);
     }
 
