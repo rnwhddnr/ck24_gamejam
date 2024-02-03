@@ -70,7 +70,10 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (!GM.Can_interact)
+        {
+            RG.velocity = Vector2.zero;
             return;
+        }
 
         //±¸¸£±â
         if (Input.GetMouseButtonDown(1)&&!Roll)
