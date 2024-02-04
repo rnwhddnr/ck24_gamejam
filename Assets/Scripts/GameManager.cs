@@ -9,6 +9,7 @@ public class Data
     public bool Tutorial;
     public int Coin;
     public string SceneName = "Main";
+    Inven_manager inven;
 }
 public class GameManager : MonoBehaviour
 {

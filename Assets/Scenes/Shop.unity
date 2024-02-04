@@ -1200,6 +1200,7 @@ MonoBehaviour:
   recipes:
   - {fileID: 11400000, guid: 357eefd94fd44f740b07dff35ef825cf, type: 2}
   items: []
+  Food_items: []
   nomal_slot:
   - {fileID: 707290495}
   - {fileID: 669656038}
