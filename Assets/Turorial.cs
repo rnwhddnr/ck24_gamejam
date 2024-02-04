@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Turorial : MonoBehaviour
@@ -9,6 +10,7 @@ public class Turorial : MonoBehaviour
     [SerializeField] GameObject Portal;
     [SerializeField] Interaction[] NPC = new Interaction[4];
     [SerializeField] Player Player;
+    [SerializeField] GameObject ChatBoxPrefab;
     ChatBox ChatBox;
     private void Start()
     {
@@ -74,6 +76,79 @@ public class Turorial : MonoBehaviour
         GameManager.instance.Can_interact = true;
         mainCamera.enabled = true;
         TutoCamera.enabled = false;
+        GameObject OBJ = Instantiate(ChatBoxPrefab);
+        TextMeshPro text = OBJ.GetComponent<TextMeshPro>();
+        text.text = GameManager.instance.OperationKey["Jump"].ToString() + " 를 눌러 점프.";
+        while (true)
+        {
+            yield return null;
+            OBJ.transform.position = Player.transform.position + Vector3.up * 2;
+            if (Input.GetKeyDown(GameManager.instance.OperationKey["Jump"]))
+            {
+                break;
+            }
+        }
+        text.text = GameManager.instance.OperationKey["LeftMove"].ToString() + " 를 눌러 왼쪽 이동.";
+        while (true)
+        {
+            yield return null;
+            OBJ.transform.position = Player.transform.position + Vector3.up * 2;
+            if (Input.GetKeyDown(GameManager.instance.OperationKey["LeftMove"]))
+            {
+                break;
+            }
+        }
+        text.text = GameManager.instance.OperationKey["RightMove"].ToString() + " 를 눌러 오른쪽 이동.";
+        while (true)
+        {
+            yield return null;
+            OBJ.transform.position = Player.transform.position + Vector3.up * 2;
+            if (Input.GetKeyDown(GameManager.instance.OperationKey["RightMove"]))
+            {
+                break;
+            }
+        }
+        text.text = GameManager.instance.OperationKey["Inventory"].ToString() + " 를 눌러 인벤토리 열기.";
+        while (true)
+        {
+            yield return null;
+            OBJ.transform.position = Player.transform.position + Vector3.up * 2;
+            if (Input.GetKeyDown(GameManager.instance.OperationKey["Inventory"]))
+            {
+                break;
+            }
+        }
+        text.text = GameManager.instance.OperationKey["Interaction"].ToString() + " 를 눌러 상호작용.";
+        while (true)
+        {
+            yield return null;
+            OBJ.transform.position = Player.transform.position + Vector3.up * 2;
+            if (Input.GetKeyDown(GameManager.instance.OperationKey["Interaction"]))
+            {
+                break;
+            }
+        }
+        text.text = "마우스 우클릭으로 눌러 구르기.";
+        while (true)
+        {
+            yield return null;
+            OBJ.transform.position = Player.transform.position + Vector3.up * 2;
+            if (Input.GetMouseButtonDown(1))
+            {
+                break;
+            }
+        }
+        text.text = "마우스 좌클릭으로 공격.";
+        while (true)
+        {
+            yield return null;
+            OBJ.transform.position = Player.transform.position + Vector3.up * 2;
+            if (Input.GetMouseButtonDown(0))
+            {
+                break;
+            }
+        }
+        Destroy(OBJ);
         GameManager.instance.Data.Tutorial = true;
         yield return null;
     }

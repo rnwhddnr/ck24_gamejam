@@ -3025,6 +3025,7 @@ MonoBehaviour:
   - {fileID: 1778803649}
   - {fileID: 1407435333}
   Player: {fileID: 659835418}
+  ChatBoxPrefab: {fileID: 4826890728797931252, guid: d72e3f201c24e444ca19c184313717aa, type: 3}
 --- !u!114 &522829665
 MonoBehaviour:
   m_ObjectHideFlags: 0
