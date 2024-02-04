@@ -11,6 +11,12 @@ public class Data
     public string SceneName = "Main";
     Inven_manager inven;
 }
+[System.Serializable]
+public class KeySaveFile
+{
+    public List<string> Keys = new List<string>();
+    public List<KeyCode> KeyCodes = new List<KeyCode>();
+}
 public class GameManager : MonoBehaviour
 {
     public Data Data;
@@ -26,17 +32,49 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        KeySaveFile saveFile = new KeySaveFile();
+        string path = Path.Combine(Application.dataPath, "KeyData.json");
         Data = new Data();
         instance = this;
         DontDestroyOnLoad(gameObject);
-        OperationKey.Add("RightMove", KeyCode.D);
-        OperationKey.Add("LeftMove", KeyCode.A);
-        OperationKey.Add("Jump", KeyCode.W);
-        OperationKey.Add("Sit", KeyCode.S);
-        OperationKey.Add("Skill", KeyCode.E);
-        OperationKey.Add("Inventory", KeyCode.C);
-        OperationKey.Add("ZoomMap", KeyCode.Tab);
-        OperationKey.Add("Interaction", KeyCode.F);
+        if (!File.Exists(path))
+        {
+            OperationKey.Add("RightMove", KeyCode.D);
+            OperationKey.Add("LeftMove", KeyCode.A);
+            OperationKey.Add("Jump", KeyCode.W);
+            OperationKey.Add("Sit", KeyCode.S);
+            OperationKey.Add("Skill", KeyCode.E);
+            OperationKey.Add("Inventory", KeyCode.C);
+            OperationKey.Add("Interaction", KeyCode.F);
+            foreach (KeyValuePair<string, KeyCode> S in OperationKey)
+            {
+                saveFile.KeyCodes.Add(S.Value);
+                saveFile.Keys.Add(S.Key);
+            }
+            string jsonData = JsonUtility.ToJson(saveFile);
+            File.WriteAllText(path, jsonData);
+        }
+        else
+        {
+            string jsonData = File.ReadAllText(path);
+            saveFile = JsonUtility.FromJson<KeySaveFile>(jsonData);
+            for (int i = 0; i < saveFile.KeyCodes.Count; i++)
+            {
+                OperationKey.Add(saveFile.Keys[i], saveFile.KeyCodes[i]);
+            }
+        }
+    }
+    public void KeySave()
+    {
+        KeySaveFile saveFile = new KeySaveFile();
+        string path = Path.Combine(Application.dataPath, "KeyData.json");
+        foreach (KeyValuePair<string, KeyCode> S in OperationKey)
+        {
+            saveFile.KeyCodes.Add(S.Value);
+            saveFile.Keys.Add(S.Key);
+        }
+        string jsonData = JsonUtility.ToJson(saveFile);
+        File.WriteAllText(path, jsonData);
     }
     void Start()
     {
