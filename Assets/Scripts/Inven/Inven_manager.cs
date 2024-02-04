@@ -52,6 +52,9 @@ public class Inven_manager : MonoBehaviour
 
     private void inven_control()
     {
+        if (!GameManager.instance.Can_interact)
+            return;
+
         if (SceneManager.GetActiveScene().name == "Main" || SceneManager.GetActiveScene().name == "Load")
             return;
 
