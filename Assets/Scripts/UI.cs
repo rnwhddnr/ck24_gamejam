@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -41,5 +42,17 @@ public class UI : MonoBehaviour
     {
         GameManager GM = GameManager.instance;
         text.text = GM.Width[GM.NowResolution].ToString() + "X" + GM.Height[GM.NowResolution].ToString();
+    }
+    public void SaveFileNumber(int Num)
+    {
+        GameManager.instance.SaveFileNum = Num;
+        string path = Path.Combine(Application.dataPath, "Data_" + Num.ToString() + ".json");
+        if (!File.Exists(path))
+        {
+            GameManager.instance.SaveFileNum = 0;
+            return;
+        }
+        GameManager.instance.LoadData();
+        Debug.Log("Loading");
     }
 }
