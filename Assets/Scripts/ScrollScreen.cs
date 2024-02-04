@@ -11,19 +11,11 @@ public class ScrollScreen : MonoBehaviour
     Scrollbar SB;
     [SerializeField] float Max;
     [SerializeField] float Min;
-    TextMeshProUGUI[] TMP = new TextMeshProUGUI[10];
+    [SerializeField] TextMeshProUGUI[] TMP = new TextMeshProUGUI[10];
     private void Start()
     {
         RT = transform.GetChild(0).GetComponent<RectTransform>();
         SB = transform.GetChild(1).GetComponent<Scrollbar>();
-        if (gameObject.name == "SaveLoadScreen")
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                TMP[i] = RT.transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>();
-            }
-            gameObject.SetActive(false);
-        }
     }
     private void OnEnable()
     {
