@@ -9,8 +9,8 @@ public class Shop : MonoBehaviour
     [Space(10f)]
 
     public List<Recipe> recipes = new List<Recipe>();
-    [SerializeField] List<item> items = new List<item>();
-    
+    public List<item> items = new List<item>();
+    public List<item> Food_items = new List<item>();
 
     public List<inven_slot> nomal_slot = new List<inven_slot>();
     public List<inven_slot> food_slot = new List<inven_slot>();
@@ -74,23 +74,33 @@ public class Shop : MonoBehaviour
                 GameObject new_item_obj = Inven_manager.instance.Spawn_new_item(rec.Get_item(items.ToArray()), Result_slot);
                 new_item_obj.tag = "Food";
                 new_item_obj.GetComponent<inven_item>().is_result_slot = true;
+                Food_items.Add(new_item_obj.GetComponent<inven_item>().item);
 
                 return;
             }
         }
     }
 
-    public int sell_all_food()
+    public bool sell_food(item item)
     {
-        int result = 0;
+        bool result = false;
 
-        for (int i = 0; i < food_slot.Count; i++)
+        if (Food_items.Contains(item))
         {
-            if (food_slot[i].GetComponentInChildren<inven_item>() == null)
-                continue;
-
-            result += food_slot[i].GetComponentInChildren<inven_item>().item.coin;
-            Destroy(food_slot[i].GetComponentInChildren<inven_item>().gameObject);
+            Inven_manager.instance.Coin += item.coin;
+            Food_items.Remove(item);
+            
+            for (int i = 0;i < food_slot.Count;i++)
+            {
+                if (food_slot[i].GetComponentInChildren<inven_item>() != null)
+                {
+                    if (food_slot[i].GetComponentInChildren<inven_item>().item == item)
+                    {
+                        food_slot[i].GetComponentInChildren<inven_item>().Count -= 1;
+                        result = true;
+                    }
+                }
+            }
         }
 
         return result;
@@ -103,5 +113,7 @@ public class Shop : MonoBehaviour
             if (nomal_slot[i].GetComponentInChildren<inven_item>() != null)
                 nomal_slot[i].GetComponentInChildren<inven_item>().Count -= 1;
         }
+
+        Butten_cook();
     }
 }

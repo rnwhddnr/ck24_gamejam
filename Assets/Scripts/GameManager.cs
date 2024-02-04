@@ -11,7 +11,9 @@ public class GameManager : MonoBehaviour
     public int[] Height = { 1080, 900, 800 };
     public int NowResolution;
     public bool WindowScreen;
-    public bool Can_interact;
+    public bool Can_interact = true;
+    public bool Can_move = true;
+
     private void Awake()
     {
         instance = this;

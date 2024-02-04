@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         GM = GameManager.instance;
         RG = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
-        canvas = transform.GetChild(2).GetComponent<Canvas>();
+        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         for (int i = 0; i < MaxHp; i++)
         {
             GameObject OBJ = Instantiate(HpbarPrefab, canvas.transform);
@@ -72,8 +72,12 @@ public class Player : MonoBehaviour
         if (!GM.Can_interact)
         {
             RG.velocity = Vector2.zero;
+            if (!GM.Can_move)
+            {
+                Interact();
+            }
             return;
-        }
+        }        
 
         //±¸¸£±â
         RaycastHit2D hit = Physics2D.BoxCast(transform.position, new Vector2(1, 1), 0, Vector2.down, 0.52f, 1 << 3);

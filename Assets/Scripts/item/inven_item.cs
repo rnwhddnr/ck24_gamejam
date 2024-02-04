@@ -27,7 +27,12 @@ public class inven_item : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
             count = value;
 
             if (count <= 0)
+            {
+                if (Inven_manager.instance.shop != null)
+                    Inven_manager.instance.shop.delet_item(item);
+
                 Destroy(gameObject);
+            }
             else
             {
                 Count_text.text = count.ToString();

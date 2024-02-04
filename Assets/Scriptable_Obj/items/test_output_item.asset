@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 436cfe7e2fb982d47a8ddac63d40ee2b, type: 3}
   m_Name: test_output_item
   m_EditorClassIdentifier: 
-  Item_Name: 
-  Item_Description: 
+  Item_Name: "\uD14C\uC2A4\uD2B8 \uC544\uC774\uD15C 4"
+  Item_Description: "\uD14C\uC2A4\uD2B8 \uC544\uC774\uD15C 4"
   Item_Icon: {fileID: 0}
   coin: 100
