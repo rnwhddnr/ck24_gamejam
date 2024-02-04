@@ -67,6 +67,11 @@ public class Player : MonoBehaviour
         Hp = MaxHp;
         hp = Hp;
     }
+
+    private void OnEnable()
+    {
+        GameManager.instance.Data.SceneName = SceneManager.GetActiveScene().name;
+    }
     void Update()
     {
         if (!GM.Can_interact)
