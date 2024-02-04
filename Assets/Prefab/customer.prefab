@@ -201,7 +201,7 @@ MonoBehaviour:
   target: {fileID: 0}
   End_target: {fileID: 0}
   buy_item: {fileID: 11400000, guid: ec8c9987f39210c48a51d0d96a07dc83, type: 2}
-  speed: 0.02
+  speed: 5
   Yvalue: 1.15
   ChatBoxPrefab: {fileID: 4684465238247079664}
   Count: 0

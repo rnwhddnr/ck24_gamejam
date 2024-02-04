@@ -41,7 +41,7 @@ public class customer : MonoBehaviour
     {
         if (!is_end)
         {
-            transform.parent.position = Vector2.MoveTowards(transform.parent.position, target.position, speed);   
+            transform.parent.position = Vector2.MoveTowards(transform.parent.position, target.position, speed * Time.deltaTime);
         }
         else
         {
@@ -52,7 +52,7 @@ public class customer : MonoBehaviour
             }
             else
             {
-                transform.parent.position = Vector2.MoveTowards(transform.parent.position, End_target.position, speed);
+                transform.parent.position = Vector2.MoveTowards(transform.parent.position, End_target.position, speed * Time.deltaTime);
             }
         }
     }

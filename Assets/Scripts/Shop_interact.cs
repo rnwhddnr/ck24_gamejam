@@ -63,7 +63,7 @@ public class Shop_interact : MonoBehaviour
 
     public void Button_start_sale()
     {
-        Vector3 pos = Vector3.Lerp(Camera.main.transform.position, new Vector3(-4, -1, -10), 0.05f);
+        Vector3 pos = Vector3.Lerp(Camera.main.transform.position, new Vector3(-4, -1, -10), 10 * Time.deltaTime);
         Camera.main.transform.position = new Vector3(pos.x, pos.y, -10f);
 
         GameManager.instance.Can_move = false;
@@ -76,7 +76,7 @@ public class Shop_interact : MonoBehaviour
         choose_obj.SetActive(false);
 
         GameObject player = GameObject.Find("Player");
-        player.transform.position = new Vector2(0.2f, -3f);
+        player.transform.position = transform.parent.GetChild(0).position;
         player.transform.GetChild(0).gameObject.SetActive(false);
         player.transform.GetChild(1).gameObject.SetActive(false);
     }
