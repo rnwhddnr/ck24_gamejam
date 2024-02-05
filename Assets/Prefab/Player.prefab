@@ -303,6 +303,8 @@ MonoBehaviour:
   MaxJumpCount: 2
   JumpPower: 5
   Speed: 5
+  cant_cam: 0
+  freez: 0
   Atk: 1
   camera_speed: 5
   HitRange: {fileID: 9163463560955187514}
@@ -310,6 +312,7 @@ MonoBehaviour:
   canvas: {fileID: 0}
   WeaponCenter: {fileID: 5744319030656031836}
   PolygonCollider: {fileID: 1591852768541058902}
+  Interactable: 1
   Hpbars: []
   HpbarPrefab: {fileID: 6024168292320739311, guid: 2a0f50498252b974abd3554aeed97346, type: 3}
 --- !u!50 &9163463560267334239
