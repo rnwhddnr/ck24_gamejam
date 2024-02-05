@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject WeaponCenter;
     public PolygonCollider2D PolygonCollider;
     Animator Animator;
+    public bool Interactable = true;
 
     public int Hp
     {

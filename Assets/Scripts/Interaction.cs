@@ -21,9 +21,8 @@ public class Interaction : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            if (text == null)
+            if (text == null || !collision.transform.GetComponent<Player>().Interactable)
                 return;
-
             text.text = GameManager.instance.OperationKey["Interaction"].ToString();
             text.enabled = true;
         }
@@ -32,7 +31,7 @@ public class Interaction : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
-            if (text == null)
+            if (text == null || !collision.transform.GetComponent<Player>().Interactable)
                 return;
 
             text.enabled = false;
