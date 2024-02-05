@@ -212,7 +212,7 @@ public class Player : MonoBehaviour
 
     void Camera_move()
     {
-        Vector3 pos = Vector3.Lerp(Camera.transform.position, transform.position + (Vector3.up * 2), camera_speed);
+        Vector3 pos = Vector3.Lerp(Camera.transform.position, transform.position + (Vector3.up * 2), camera_speed * Time.deltaTime);
         Camera.transform.position = new Vector3(pos.x, pos.y, -10f);
     }
 

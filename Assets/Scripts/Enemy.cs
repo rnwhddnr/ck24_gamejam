@@ -53,7 +53,8 @@ public class Enemy : MonoBehaviour
     */
     private void Destroy_enemy()
     {
-        Instantiate(Item, transform.position, Quaternion.identity);
+        if (Item != null)
+            Instantiate(Item, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
     private void OnTriggerStay2D(Collider2D collision)
