@@ -11,7 +11,7 @@ public class power_up_shop_interact : MonoBehaviour
     private void Start()
     {
         GetComponent<Interaction>().interact += active_UI;
-        buttons = UI.transform.GetComponentsInChildren<Button>();
+        buttons = UI.transform.Find("Panel").GetComponentsInChildren<Button>();
     }
 
     public void active_UI()
