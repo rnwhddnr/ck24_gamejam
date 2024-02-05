@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Turorial : MonoBehaviour
 {
+    [SerializeField] bool skip;
+
     [SerializeField] Camera mainCamera;
     [SerializeField] Camera TutoCamera;
     [SerializeField] GameObject Portal;
@@ -14,6 +16,9 @@ public class Turorial : MonoBehaviour
     ChatBox ChatBox;
     private void Start()
     {
+        if (skip)
+            return;
+
         ChatBox = GetComponent<ChatBox>();
         if (GameManager.instance.Data.Tutorial)
             Destroy(gameObject);

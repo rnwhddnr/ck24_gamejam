@@ -3016,6 +3016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10291c65c47d6a24bbef62ad3e9defdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skip: 1
   mainCamera: {fileID: 1725505355}
   TutoCamera: {fileID: 60545580}
   Portal: {fileID: 1913594249}
@@ -6552,7 +6553,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: -483420483
   m_SortingOrder: 0
   m_TargetDisplay: 0

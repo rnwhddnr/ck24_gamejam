@@ -7,17 +7,22 @@ using UnityEngine.UI;
 
 public class item_tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    private GameObject tooltip;
+    [SerializeField] private GameObject tooltip;
     private item item;
     private RectTransform rect;
 
     private void Start()
     {
-        item = GetComponent<item>();
+        item = GetComponent<inven_item>().item;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        tooltip = GameObject.Find("inven_group").transform.Find("tooltip").gameObject;
+
+        if (tooltip == null)
+            return;
+
         tooltip.transform.Find("item_image").GetComponent<Image>().sprite = item.Item_Icon;
         tooltip.transform.Find("item_name").GetComponent<TextMeshProUGUI>().text = item.Item_Name;
         tooltip.transform.Find("item_de").GetComponent<TextMeshProUGUI>().text = item.Item_Description;
@@ -27,13 +32,22 @@ public class item_tooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (tooltip == null)
+            return;
+
         tooltip.SetActive(false);
     }
 
     private void Update()
     {
+        if (tooltip == null)
+            return;
+
         if (tooltip.activeSelf == true)
         {
+            if (rect == null)
+                rect = tooltip.GetComponent<RectTransform>();
+
             tooltip.transform.position = Input.mousePosition;
 
             if (rect.anchoredPosition.x + rect.sizeDelta.x > Screen.width && rect.anchoredPosition.y + rect.sizeDelta.y > Screen.height)

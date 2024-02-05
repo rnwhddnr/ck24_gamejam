@@ -177,6 +177,9 @@ public class Player : MonoBehaviour
     }
     void Interact()
     {
+        if (Inven_manager.instance.inven.activeSelf)
+            return;
+
         if (Input.GetKeyDown(GM.OperationKey["Interaction"]))
         {
             List<float> Distance = new List<float>();
