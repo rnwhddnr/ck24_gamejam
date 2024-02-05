@@ -100,7 +100,7 @@ public class Enemy : MonoBehaviour
         RaycastHit2D rayhit = Physics2D.Raycast(front, Vector2.down, 1, LayerMask.GetMask("Block"));
         Debug.DrawRay(front, Vector2.down, Color.green);
 
-        if (Mathf.Abs(player.transform.position.x - transform.position.x) <= AttackRange)
+        if (Mathf.Abs(player.transform.position.x - transform.position.x) <= AttackRange && Go != null)
             Go();
         if (rayhit.collider == null)
             rigid.velocity = new Vector2(0, rigid.velocity.y);

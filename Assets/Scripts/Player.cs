@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
         Animator = GetComponent<Animator>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         maxhp_Refresh();
-        MaxHp = 5;
+        MaxHp = 10;
     }
 
     private void maxhp_Refresh()

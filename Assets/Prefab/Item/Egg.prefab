@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7307570185702000193}
   - component: {fileID: 7307570185702000198}
   m_Layer: 0
-  m_Name: ItemOBJ
+  m_Name: Egg
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ffcefc76678374fb00ab740c79f2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: ad0496e1bf23a8a4ab36dbe5e89233cc, type: 2}
+  item: {fileID: 11400000, guid: 6ec96da502801214299b4caae27fba3d, type: 2}
 --- !u!61 &7307570185702000198
 BoxCollider2D:
   m_ObjectHideFlags: 0

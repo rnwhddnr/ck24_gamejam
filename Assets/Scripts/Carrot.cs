@@ -6,7 +6,6 @@ using UnityEngine;
 public class Carrot : MonoBehaviour
 {
     Enemy Enemy;
-    Player P;
     [SerializeField] Sprite DefaultSprite;
     [SerializeField] Sprite[] ChargeSprite;
     [SerializeField] float ChargeTime;
@@ -21,7 +20,6 @@ public class Carrot : MonoBehaviour
     }
     public void ChargeStart()
     {
-        P = Enemy.player;
         Enemy.player = null;
         Enemy.Attacked = true;
         StartCoroutine(Charge());
