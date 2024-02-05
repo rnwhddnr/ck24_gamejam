@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public class inven_item : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
+public class inven_item : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public Image Item_image;
     public TextMeshProUGUI Count_text;
@@ -141,5 +141,41 @@ public class inven_item : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     public void OnPointerExit(PointerEventData eventData)
     {
         pointer = false;
+    }
+
+    float clickitem;
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if ((Time.time - clickitem) < 0.3f)
+        {
+            uesd_item();
+            clickitem = -1;
+        }
+        else
+            clickitem = Time.time;
+    }
+
+    private void uesd_item()
+    {
+        if (transform.CompareTag("Food"))
+        {
+            switch(item.Item_Name)
+            {
+                case "super_carrot":
+                    break;
+                case "super_2":
+                    break;
+                case "super_3":
+                    break;
+                case "super_4":
+                    break;
+                case "super_5":
+                    break;
+                default:
+                    Count -= 1;
+                    break;
+
+            }
+        }
     }
 }

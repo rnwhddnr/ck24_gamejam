@@ -1,20 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class power_up_shop_interact : MonoBehaviour
 {
     [SerializeField] GameObject UI;
+    private Button[] buttons; 
 
     private void Start()
     {
         GetComponent<Interaction>().interact += active_UI;
+        buttons = UI.transform.GetComponentsInChildren<Button>();
     }
 
     public void active_UI()
     {
         GameManager.instance.Can_interact = false;
         UI.SetActive(true);
+
+        if (Inven_manager.instance.Coin < 100)
+        {
+            foreach (Button B in buttons)
+                B.interactable = false;
+        }
+        else
+        {
+            foreach (Button B in buttons)
+                B.interactable = true;
+        }
     }
 
     public void disable_UI()
@@ -27,11 +41,28 @@ public class power_up_shop_interact : MonoBehaviour
     {
         switch (name)
         {
+            case "ATK":
+                FindObjectOfType<Player>().Atk += 1;
+                break;
+            case "HP":
+                FindObjectOfType<Player>().MaxHp += 1;
+                break;
+            case "SPEED":
+                FindObjectOfType<Player>().Speed += 0.5f;
+                break;
+
             default:
-                if (Inven_manager.instance.Coin - 50 >= 0)
-                    Inven_manager.instance.Coin -= 50;
-                else
-                    Debug.Log("코인부족");
+                if (Inven_manager.instance.Coin >= 100)
+                {
+                    foreach (Button B in buttons)
+                        B.interactable = true;
+                    Inven_manager.instance.Coin -= 100;
+                    if (Inven_manager.instance.Coin < 100)
+                    {
+                        foreach (Button B in buttons)
+                            B.interactable = false;
+                    }
+                }
                 break;
         }
     }

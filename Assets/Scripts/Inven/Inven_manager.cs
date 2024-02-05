@@ -17,7 +17,7 @@ public class Inven_manager : MonoBehaviour
     public GameObject Item_prefeb;
     public Shop shop;
 
-    private int coin;
+    [SerializeField] private int coin;
     public int Coin
     {
         get { return coin; }

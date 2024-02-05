@@ -15,9 +15,18 @@ public class Player : MonoBehaviour
     public int JumpPower = 5;
     private bool NowJump;
     
-    public int Speed;
-    
-    public int MaxHp;
+    public float Speed;
+
+    private int maxhp;
+    public int MaxHp
+    {
+        get { return maxhp; }
+        set
+        {
+            maxhp = value;
+            maxhp_Refresh();
+        }
+    }
     private int hp;
     public int Atk;
     bool Attacked;
@@ -57,6 +66,11 @@ public class Player : MonoBehaviour
         RG = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        maxhp_Refresh();
+    }
+
+    private void maxhp_Refresh()
+    {
         for (int i = 0; i < MaxHp; i++)
         {
             GameObject OBJ = Instantiate(HpbarPrefab, canvas.transform);
@@ -153,7 +167,7 @@ public class Player : MonoBehaviour
     void Move()
     {
         RG.velocity = new Vector2(0, RG.velocity.y);
-        int XMove = 0;
+        float XMove = 0;
         if (Input.GetKey(GM.OperationKey["RightMove"]))
         {
             XMove += 1 * Speed;
