@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ public class Player : MonoBehaviour
 {
     private bool Invincibility;
     public float InvincibilityTime;
+    bool Knockback;
 
     public int JumpCount = 1;
     public int MaxJumpCount = 1;
@@ -67,10 +69,17 @@ public class Player : MonoBehaviour
         Animator = GetComponent<Animator>();
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         maxhp_Refresh();
+        MaxHp = 5;
     }
 
     private void maxhp_Refresh()
     {
+        while(Hpbars.Count > 0)
+        {
+            GameObject obj = Hpbars[0];
+            Hpbars.RemoveAt(0);
+            Destroy(obj);
+        }
         for (int i = 0; i < MaxHp; i++)
         {
             GameObject OBJ = Instantiate(HpbarPrefab, canvas.transform);
@@ -137,7 +146,7 @@ public class Player : MonoBehaviour
     {
         Roll = true;
         Vector2 Dir = Pos - transform.position;
-        int dir=System.Math.Sign(Dir.x);
+        int dir = Math.Sign(Dir.x);
         RG.velocity = new Vector2(Speed * 2.5f * dir, RG.velocity.y);
         HitRange.enabled = false;
         yield return new WaitForSeconds(0.2f);
@@ -166,7 +175,8 @@ public class Player : MonoBehaviour
     }
     void Move()
     {
-        RG.velocity = new Vector2(0, RG.velocity.y);
+        if (!Knockback)
+            RG.velocity = new Vector2(0, RG.velocity.y);
         float XMove = 0;
         if (Input.GetKey(GM.OperationKey["RightMove"]))
         {
@@ -178,7 +188,8 @@ public class Player : MonoBehaviour
             XMove -= 1 * Speed;
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
-        RG.velocity = new Vector2(XMove, RG.velocity.y);
+        if (XMove != 0)
+            RG.velocity = new Vector2(XMove, RG.velocity.y);
         if (Input.GetKeyDown(GM.OperationKey["Jump"]))
         {
             if (JumpCount > 0)
@@ -239,10 +250,16 @@ public class Player : MonoBehaviour
         Hp -= enemy.Attack;
         float T = 0;
         float Alpha = 1;
+        Knockback = true;
+        Vector2 Dir = enemy.transform.position - transform.position;
+        int Direction = Math.Sign(Dir.x);
+        RG.velocity = new Vector2(-1 * Direction, RG.velocity.y);
         while (T < InvincibilityTime)
         {
             yield return new WaitForSeconds(0.1f);
             T += 0.1f;
+            if (T == 0.5f)
+                Knockback = false;
             if (Alpha > 0.5f)
             {
                 Alpha -= 0.1f;
