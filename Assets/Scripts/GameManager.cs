@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public int[] Width = { 1920, 1600, 1280 };
     public int[] Height = { 1080, 900, 800 };
     public int NowResolution;
-    public bool WindowScreen;
+    public bool WindowScreen = true;
     public bool Can_interact = true;
     public bool Can_move = true;
 

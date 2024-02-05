@@ -1099,7 +1099,7 @@ MonoBehaviour:
   Width: 800700004006000000050000
   Height: 380400008403000020030000
   NowResolution: 0
-  WindowScreen: 0
+  WindowScreen: 1
   Can_interact: 1
   Can_move: 1
 --- !u!1001 &685855113
@@ -1911,6 +1911,7 @@ MonoBehaviour:
   - {fileID: 296177512}
   Item_prefeb: {fileID: 8712073020738762564, guid: 2ef13c798989099448a52d2034ebba9d, type: 3}
   shop: {fileID: 0}
+  coin: 0
   coin_text: {fileID: 200273935}
   test_add_items:
   - {fileID: 11400000, guid: ad0496e1bf23a8a4ab36dbe5e89233cc, type: 2}
