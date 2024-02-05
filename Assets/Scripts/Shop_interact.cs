@@ -52,7 +52,7 @@ public class Shop_interact : MonoBehaviour
 
     public void End_cook()
     {
-        choose_obj.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "장사히기";
+        choose_obj.transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>().text = "장사하기";
         choose_obj.transform.GetChild(2).GetComponentInChildren<TextMeshProUGUI>().text = "장사하지않기";
 
         choose_obj.transform.GetChild(1).GetComponent<Button>().onClick.RemoveAllListeners();
