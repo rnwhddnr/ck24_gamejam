@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rigid;
     public int hp;
     public int Attack = 1;
+
     public int HP
     {
         get { return hp; }
@@ -54,7 +55,10 @@ public class Enemy : MonoBehaviour
     private void Destroy_enemy()
     {
         if (Item != null)
-            Instantiate(Item, transform.position, Quaternion.identity);
+        {
+            GameObject item = Instantiate(Item, transform.position, Quaternion.identity);
+            item.GetComponent<SpriteRenderer>().sprite = item.GetComponent<ItemOBJ>().item.Item_Icon;
+        }
         Destroy(gameObject);
     }
     private void OnTriggerStay2D(Collider2D collision)

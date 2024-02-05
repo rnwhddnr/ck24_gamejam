@@ -13,6 +13,9 @@ public class Shop_interact : MonoBehaviour
     private int ran_count;
     private int cnt = 0;
 
+    [SerializeField] Camera cut_cam;
+    [SerializeField] Camera main_cam;
+
     private void Start()
     {
         GetComponent<Interaction>().interact += active_choose;
@@ -68,6 +71,10 @@ public class Shop_interact : MonoBehaviour
 
         GameManager.instance.Can_move = false;
         FindObjectOfType<Player>().canvas.gameObject.SetActive(false);
+        
+        cut_cam.enabled = true;
+        main_cam.enabled = false;
+        cut_cam.transform.position = main_cam.transform.position; 
 
         Inven_manager.instance.shop.gameObject.layer = 0;
         ran_count = Random.Range(4, 7);
@@ -87,6 +94,9 @@ public class Shop_interact : MonoBehaviour
         GameManager.instance.Can_interact = true;
         GameManager.instance.Can_move = true;
         FindObjectOfType<Player>().canvas.gameObject.SetActive(true);
+        cut_cam.enabled = false;
+        main_cam.enabled = true;
+        main_cam.transform.position = cut_cam.transform.position;
 
         StartCoroutine(cammove(true));
 
@@ -102,17 +112,17 @@ public class Shop_interact : MonoBehaviour
     {
         if (is_return)
         {
-            for (float i = Camera.main.orthographicSize; i > 4; i -= 0.01f)
+            for (float i = cut_cam.orthographicSize; i > 4; i -= 0.01f)
             {
-                Camera.main.orthographicSize = i;
+                cut_cam.orthographicSize = i;
                 yield return new WaitForSeconds(0.05f);
             }
         }
         else
         {
-            for (float i = Camera.main.orthographicSize; i < 5; i += 0.01f)
+            for (float i = cut_cam.orthographicSize; i < 5; i += 0.01f)
             {
-                Camera.main.orthographicSize = i;
+                cut_cam.orthographicSize = i;
                 yield return new WaitForSeconds(0.05f);
             }
         }

@@ -12534,6 +12534,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1428031176}
   prefeb_cust: {fileID: 287702454032979795, guid: daddb8e5df1d94f4fbdb767ca00e333f, type: 3}
+  cut_cam: {fileID: 60545580}
+  main_cam: {fileID: 1725505355}
 --- !u!1001 &2014772301
 PrefabInstance:
   m_ObjectHideFlags: 0
