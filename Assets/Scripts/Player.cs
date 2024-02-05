@@ -97,7 +97,6 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        Physics2D.IgnoreLayerCollision(1 << 6, 1 << 10);
         if (!GM.Can_interact)
         {
             RG.velocity = Vector2.zero;
@@ -189,7 +188,7 @@ public class Player : MonoBehaviour
             XMove -= 1 * Speed;
             transform.eulerAngles = new Vector3(0, 180, 0);
         }
-        if (XMove != 0)
+        if (XMove != 0 && !Knockback)
             RG.velocity = new Vector2(XMove, RG.velocity.y);
         if (Input.GetKeyDown(GM.OperationKey["Jump"]))
         {
@@ -254,12 +253,12 @@ public class Player : MonoBehaviour
         Knockback = true;
         Vector2 Dir = enemy.transform.position - transform.position;
         int Direction = Math.Sign(Dir.x);
-        RG.velocity = new Vector2(-1 * Direction, RG.velocity.y);
+        RG.velocity = new Vector2(-2.5f * Direction, RG.velocity.y);
         while (T < InvincibilityTime)
         {
             yield return new WaitForSeconds(0.1f);
             T += 0.1f;
-            if (T == 0.5f)
+            if (T == 0.3f)
                 Knockback = false;
             if (Alpha > 0.5f)
             {

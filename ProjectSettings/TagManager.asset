@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Food
   - Item
+  - Detect
   layers:
   - Default
   - TransparentFX

@@ -5,13 +5,21 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] GameObject Item;
+    [SerializeField] GameObject Center;
+
+    public bool Attacked;
+    public float AttackRange;
+    public SpriteRenderer SR;
+    public delegate void AttackStart();
+    public AttackStart Go;
     [Space(10f)]
     public float move_speed;
    
-    private float next_move;
-    private Rigidbody2D rigid;
+    public Rigidbody2D rigid;
     public int hp;
     public int Attack = 1;
+    public Player player;
+    public int Dir;
 
     public int HP
     {
@@ -32,8 +40,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-
-        Choose_next_move();
+        SR = GetComponent<SpriteRenderer>();
         if (CommonMob)
             StartCoroutine(CommonMobAI());
     }
@@ -61,8 +68,15 @@ public class Enemy : MonoBehaviour
         }
         Destroy(gameObject);
     }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Detect"))
+            player = null;
+    }
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (collision.CompareTag("Detect") && !Attacked)
+            player = collision.transform.root.GetComponent<Player>();
         if (collision.CompareTag("Player"))
         {
             Player player = collision.transform.root.GetComponent<Player>();
@@ -73,21 +87,22 @@ public class Enemy : MonoBehaviour
     }
     private void Move()
     {
-        rigid.velocity = new Vector2(next_move * move_speed, rigid.velocity.y);
+        if (player == null)
+            return;
+        Dir = System.Math.Sign((player.transform.position - transform.position).x);
+        if (Dir == 1)
+            transform.eulerAngles = new Vector3(0, 180, 0);
+        else if (Dir == -1)
+            transform.eulerAngles = new Vector3(0, 0, 0);
+        rigid.velocity = new Vector2(Dir * move_speed, rigid.velocity.y);
 
-        Vector2 front = new Vector2(rigid.position.x + next_move, rigid.position.y);
+        Vector2 front = new Vector2(Center.transform.position.x + Dir, Center.transform.position.y);
         RaycastHit2D rayhit = Physics2D.Raycast(front, Vector2.down, 1, LayerMask.GetMask("Block"));
         Debug.DrawRay(front, Vector2.down, Color.green);
 
+        if (Mathf.Abs(player.transform.position.x - transform.position.x) <= AttackRange)
+            Go();
         if (rayhit.collider == null)
-            next_move *= -1;
-    }
-
-    private void Choose_next_move()
-    {
-        next_move = Random.Range(-1, 2);
-
-        if (next_move == 0)
-            Choose_next_move();
+            rigid.velocity = new Vector2(0, rigid.velocity.y);
     }
 }
