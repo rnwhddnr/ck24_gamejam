@@ -97,6 +97,7 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        Physics2D.IgnoreLayerCollision(1 << 6, 1 << 10);
         if (!GM.Can_interact)
         {
             RG.velocity = Vector2.zero;
