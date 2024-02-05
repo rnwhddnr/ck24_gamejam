@@ -17,13 +17,29 @@ public class Turorial : MonoBehaviour
     private void Start()
     {
         if (skip)
+        {
+            Skip();
             return;
+        }
 
         ChatBox = GetComponent<ChatBox>();
         if (GameManager.instance.Data.Tutorial)
             Destroy(gameObject);
         else
             StartCoroutine(StartTutorial());
+    }
+    void Skip()
+    {
+        for (int i = 0; i < NPC.Length; i++)
+        {
+            Destroy(NPC[i].transform.parent.GetChild(1).gameObject);
+            Destroy(NPC[i].transform.parent.GetChild(0).gameObject);
+        }
+        GameManager.instance.Can_interact = true;
+        mainCamera.enabled = true;
+        TutoCamera.enabled = false;
+        GameManager.instance.Data.Tutorial = true;
+        Destroy(gameObject);
     }
     IEnumerator StartTutorial()
     {
