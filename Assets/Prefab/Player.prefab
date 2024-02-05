@@ -222,8 +222,7 @@ MonoBehaviour:
   MaxJumpCount: 2
   JumpPower: 5
   Speed: 5
-  MaxHp: 5
-  Atk: 5
+  Atk: 1
   camera_speed: 5
   HitRange: {fileID: 9163463560955187514}
   SR: {fileID: 9163463560955187517}

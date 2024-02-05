@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Item: {fileID: 7307570185702000194, guid: d4645072c08ffe54dafa435625087efd, type: 3}
   move_speed: 0.5
-  hp: 10
+  hp: 3
   Attack: 1
   CommonMob: 1
 --- !u!1 &4006830250166011584
