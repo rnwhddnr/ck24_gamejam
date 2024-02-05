@@ -13,6 +13,7 @@ public class Turorial : MonoBehaviour
     [SerializeField] Interaction[] NPC = new Interaction[4];
     [SerializeField] Player Player;
     [SerializeField] GameObject ChatBoxPrefab;
+    [SerializeField] GameObject Camerapoint;
     ChatBox ChatBox;
     private void Start()
     {
@@ -48,13 +49,21 @@ public class Turorial : MonoBehaviour
         Portal.SetActive(false);
         mainCamera.enabled = false;
         TutoCamera.enabled = true;
-        TutoCamera.transform.position = new Vector3(8.5f, 0.6f, -10);
-        while (Vector3.Distance(TutoCamera.transform.position, new Vector3(-11, 0.6f, -10)) > 0.1f)
+        TutoCamera.transform.position = new Vector3(8.5f, Camerapoint.transform.position.y, -10);
+        Player.transform.position = new Vector3(Player.transform.position.x, -3.28f, -0);
+        Player.GetComponent<BoxCollider2D>().enabled = false;
+        while (Vector3.Distance(TutoCamera.transform.position, new Vector3(Camerapoint.transform.position.x, Camerapoint.transform.position.y, -10)) > 0.1f)
         {
             yield return null;
-            TutoCamera.transform.position = Vector3.Lerp(TutoCamera.transform.position, new Vector3(-11, 0.6f, -10), 0.5f * Time.deltaTime);
+            TutoCamera.transform.position = Vector3.Lerp(TutoCamera.transform.position, new Vector3(Camerapoint.transform.position.x, Camerapoint.transform.position.y, -10), 0.5f * Time.deltaTime);
         }
         Portal.SetActive(true);
+        yield return new WaitForSeconds(0.4f);
+        while (Vector3.Distance(Player.transform.position, new Vector3(-9, -3.28f, -0)) > 0.1f)
+        {
+            yield return null;
+            Player.transform.position = Vector3.MoveTowards(Player.transform.position, new Vector3(-9, -3.28f, -0), 5 * Time.deltaTime);
+        }
         yield return new WaitForSeconds(1);
         NPC[0].interact();
         yield return new WaitForSeconds(0.4f);
@@ -94,6 +103,7 @@ public class Turorial : MonoBehaviour
         ChatBox.ChatBoxStart();
         yield return new WaitForSeconds(1);
         Player.transform.GetChild(1).transform.gameObject.SetActive(true);
+        Player.GetComponent<BoxCollider2D>().enabled = true;
         GameManager.instance.Can_interact = true;
         mainCamera.enabled = true;
         TutoCamera.enabled = false;
