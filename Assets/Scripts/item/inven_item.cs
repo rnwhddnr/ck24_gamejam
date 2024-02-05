@@ -83,17 +83,24 @@ public class inven_item : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
         item = new_item;
         Count += 1;
 
+        Item_image = GetComponent<Image>();
+
         if (new_item.Item_Icon != null)
-            Item_image = new_item.Item_Icon;
-        else
-            Item_image = GetComponent<Image>();
+            Item_image.sprite = new_item.Item_Icon;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (transform.parent.GetComponent<inven_slot>().is_cook_slot)
+        {
+            Inven_manager.instance.shop.delet_item(item);
+            Inven_manager.instance.shop.Butten_cook();
+        }
+
         Item_image.raycastTarget = false;
         Parent_After_Drag = transform.parent;
         transform.SetParent(transform.parent.parent.parent.parent);
+        transform.SetAsLastSibling();
 
         if (is_result_slot)
         {

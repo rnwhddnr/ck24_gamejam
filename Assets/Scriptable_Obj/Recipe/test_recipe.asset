@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6c4e0c3fd2ff049a74c5e49c353497, type: 3}
   m_Name: test_recipe
   m_EditorClassIdentifier: 
-  Recipe_Name: "\uD14C\uC2A4\uD2B8"
-  Recipe_Description: "\uD14C\uC2A4\uD2B8\uC6A9 \uB808\uC2DC\uD53C"
+  Recipe_Name: "\uBE44\uBE54\uBC25 \uB798\uC2DC\uD53C"
+  Recipe_Description: "\uBE44\uBE54\uBC25 \uB808\uC2DC\uD53C\n"
   input_items:
-  - {fileID: 11400000, guid: ad0496e1bf23a8a4ab36dbe5e89233cc, type: 2}
-  - {fileID: 11400000, guid: 99ea3026b1e95a84c9aa8c32927ecf3c, type: 2}
-  - {fileID: 11400000, guid: 36b082b1721d0f64eb811a9eafa0fef4, type: 2}
   - {fileID: 11400000, guid: 1ec7413d3caf93c4db86083cc39025e9, type: 2}
+  - {fileID: 11400000, guid: 36b082b1721d0f64eb811a9eafa0fef4, type: 2}
+  - {fileID: 11400000, guid: 54c9e027684fcee4cad66aa7b6aaa094, type: 2}
+  - {fileID: 11400000, guid: 99ea3026b1e95a84c9aa8c32927ecf3c, type: 2}
+  - {fileID: 11400000, guid: ad0496e1bf23a8a4ab36dbe5e89233cc, type: 2}
   output_item: {fileID: 11400000, guid: ec8c9987f39210c48a51d0d96a07dc83, type: 2}

@@ -11,6 +11,9 @@ public class inven_slot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
+        if (transform.GetComponentInChildren<inven_item>() != null)
+            return;
+
         inven_item Drop_item = eventData.pointerDrag.GetComponent<inven_item>();
 
         if (Tag_name == "")

@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] BoxCollider2D HitRange;
     [SerializeField] SpriteRenderer SR;
-    [SerializeField] Canvas canvas;
+    public Canvas canvas;
     Camera Camera;
     GameManager GM;
     Rigidbody2D RG;

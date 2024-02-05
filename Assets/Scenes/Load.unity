@@ -1012,11 +1012,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3027fd4aee83c24d9913edf7a31ea1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Data:
+    Tutorial: 0
+    Coin: 0
+    SceneName: Main
+  SaveFileNum: 0
   Width: 800700004006000000050000
   Height: 380400008403000020030000
   NowResolution: 0
   WindowScreen: 0
   Can_interact: 1
+  Can_move: 1
 --- !u!1001 &685855113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1825,12 +1831,14 @@ MonoBehaviour:
   - {fileID: 1785758327}
   - {fileID: 296177512}
   Item_prefeb: {fileID: 8712073020738762564, guid: 2ef13c798989099448a52d2034ebba9d, type: 3}
+  shop: {fileID: 0}
   coin_text: {fileID: 200273935}
   test_add_items:
   - {fileID: 11400000, guid: ad0496e1bf23a8a4ab36dbe5e89233cc, type: 2}
   - {fileID: 11400000, guid: 99ea3026b1e95a84c9aa8c32927ecf3c, type: 2}
   - {fileID: 11400000, guid: 36b082b1721d0f64eb811a9eafa0fef4, type: 2}
   - {fileID: 11400000, guid: 1ec7413d3caf93c4db86083cc39025e9, type: 2}
+  - {fileID: 11400000, guid: 54c9e027684fcee4cad66aa7b6aaa094, type: 2}
   cooking_mod: 0
 --- !u!1001 &1410643625
 PrefabInstance:

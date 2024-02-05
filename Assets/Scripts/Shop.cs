@@ -79,6 +79,9 @@ public class Shop : MonoBehaviour
                 return;
             }
         }
+
+        if (Result_slot.GetComponentInChildren<inven_item>() != null)
+            Destroy(Result_slot.GetComponentInChildren<inven_item>().gameObject);
     }
 
     public bool sell_food(item item)

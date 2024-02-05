@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 436cfe7e2fb982d47a8ddac63d40ee2b, type: 3}
-  m_Name: test_item
+  m_Name: bibimbab
   m_EditorClassIdentifier: 
-  Item_Name: "\uD14C\uC2A4\uD2B8 \uC544\uC774\uD15C4"
-  Item_Description: "\uD14C\uC2A4\uD2B8\uC6A9 \uC544\uC774\uD15C\uC785\uB2C8\uB2E4"
-  Item_Icon: {fileID: 0}
+  Item_Name: "\uBE44\uBE54\uBC25"
+  Item_Description: "\uBE44\uBE54\uBC25\uC785\uB2C8\uB2E4\n"
+  Item_Icon: {fileID: -238592913, guid: 8872f256bba79074099eccc38d74ee55, type: 3}
+  coin: 100

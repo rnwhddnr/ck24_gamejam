@@ -6666,6 +6666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cook_result
       objectReference: {fileID: 0}
+    - target: {fileID: 7946317610371528644, guid: de629b39c545f3d4b9c118ea1c5123dd, type: 3}
+      propertyPath: Tag_name
+      value: nope
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de629b39c545f3d4b9c118ea1c5123dd, type: 3}
 --- !u!224 &1086557537 stripped

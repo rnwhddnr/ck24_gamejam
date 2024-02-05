@@ -67,6 +67,7 @@ public class Shop_interact : MonoBehaviour
         Camera.main.transform.position = new Vector3(pos.x, pos.y, -10f);
 
         GameManager.instance.Can_move = false;
+        FindObjectOfType<Player>().canvas.gameObject.SetActive(false);
 
         Inven_manager.instance.shop.gameObject.layer = 0;
         ran_count = Random.Range(4, 7);
@@ -85,6 +86,8 @@ public class Shop_interact : MonoBehaviour
     {
         GameManager.instance.Can_interact = true;
         GameManager.instance.Can_move = true;
+        FindObjectOfType<Player>().canvas.gameObject.SetActive(true);
+
         StartCoroutine(cammove(true));
 
         Inven_manager.instance.shop.gameObject.layer = 9;
