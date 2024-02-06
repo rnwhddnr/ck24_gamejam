@@ -89,23 +89,6 @@ public class Enemy : MonoBehaviour
     }
     private void Move()
     {
-        if (!is_return)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, move_pos[0].position, move_speed);
-            SR.flipX = false;
-
-            if (transform.position == move_pos[0].position)
-                is_return = true;
-        }
-        else
-        {
-            transform.position = Vector2.MoveTowards(transform.position, move_pos[1].position, move_speed);
-            SR.flipX = true;
-            
-            if (transform.position == move_pos[1].position)
-                is_return = false;
-        }
-
 
         if (player != null)
         {
@@ -124,6 +107,25 @@ public class Enemy : MonoBehaviour
                 Go();
             if (rayhit.collider == null)
                 rigid.velocity = new Vector2(0, rigid.velocity.y);
+        }
+         else
+        {
+            if (!is_return)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, move_pos[0].position, move_speed);
+                SR.flipX = false;
+
+                if (transform.position == move_pos[0].position)
+                    is_return = true;
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(transform.position, move_pos[1].position, move_speed);
+                SR.flipX = true;
+
+                if (transform.position == move_pos[1].position)
+                    is_return = false;
+            }
         }
     }
 }

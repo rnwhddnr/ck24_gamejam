@@ -224,7 +224,7 @@ MonoBehaviour:
   Attacked: 0
   AttackRange: 4.5
   SR: {fileID: 0}
-  move_speed: 1
+  move_speed: 0.1
   move_pos: []
   rigid: {fileID: 4792915116168791737}
   hp: 1

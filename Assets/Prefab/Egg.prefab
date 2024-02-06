@@ -129,7 +129,8 @@ MonoBehaviour:
   Attacked: 0
   AttackRange: 5
   SR: {fileID: 0}
-  move_speed: 1.8
+  move_speed: 0.03
+  move_pos: []
   rigid: {fileID: 1300783146654452221}
   hp: 2
   Attack: 1
