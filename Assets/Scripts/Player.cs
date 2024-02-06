@@ -140,6 +140,13 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 12)
+            Hp = 0;
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
@@ -149,6 +156,8 @@ public class Player : MonoBehaviour
             StartCoroutine(HitAnimation(collision.transform.parent.GetComponent<Enemy>()));
         }
     }
+
+    
     IEnumerator Rolling(Vector3 Pos)
     {
         Roll = true;
@@ -186,14 +195,27 @@ public class Player : MonoBehaviour
         float XMove = 0;
         if (Input.GetKey(GM.OperationKey["RightMove"]))
         {
+            transform.localScale = new Vector3(1, 1, 1);
+            transform.rotation = Quaternion.identity;
+
+            Animator.SetBool("is_move", true);
+
             XMove += 1 * Speed;
-            transform.eulerAngles = new Vector3(0, 0, 0);
+            //transform.eulerAngles = new Vector3(0, 0, 0);
         }
         else if (Input.GetKey(GM.OperationKey["LeftMove"]))
         {
+            transform.localScale = new Vector3(-1, 1, 1);
+            transform.rotation = Quaternion.identity;
+
+            Animator.SetBool("is_move", true);
+
             XMove -= 1 * Speed;
-            transform.eulerAngles = new Vector3(0, 180, 0);
+            //transform.eulerAngles = new Vector3(0, 180, 0);
         }
+        else
+            Animator.SetBool("is_move", false);
+
         if (XMove != 0 && !Knockback)
             RG.velocity = new Vector2(XMove, RG.velocity.y);
         if (Input.GetKeyDown(GM.OperationKey["Jump"]))
@@ -203,6 +225,8 @@ public class Player : MonoBehaviour
                 RG.velocity += new Vector2(0, JumpPower);
                 JumpCount--;
                 NowJump = true;
+
+                Animator.SetTrigger("jump");
             }
         }
     }

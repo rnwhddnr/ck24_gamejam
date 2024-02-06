@@ -14,7 +14,9 @@ public class Enemy : MonoBehaviour
     public AttackStart Go;
     [Space(10f)]
     public float move_speed;
-   
+    [SerializeField] Transform[] move_pos;
+    private bool is_return;
+
     public Rigidbody2D rigid;
     public int hp;
     public int Attack = 1;
@@ -87,22 +89,41 @@ public class Enemy : MonoBehaviour
     }
     private void Move()
     {
-        if (player == null)
-            return;
-        Dir = System.Math.Sign((player.transform.position - transform.position).x);
-        if (Dir == 1)
-            transform.eulerAngles = new Vector3(0, 180, 0);
-        else if (Dir == -1)
-            transform.eulerAngles = new Vector3(0, 0, 0);
-        rigid.velocity = new Vector2(Dir * move_speed, rigid.velocity.y);
+        if (!is_return)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, move_pos[0].position, move_speed);
+            SR.flipX = false;
 
-        Vector2 front = new Vector2(Center.transform.position.x + Dir, Center.transform.position.y);
-        RaycastHit2D rayhit = Physics2D.Raycast(front, Vector2.down, 1, LayerMask.GetMask("Block"));
-        Debug.DrawRay(front, Vector2.down, Color.green);
+            if (transform.position == move_pos[0].position)
+                is_return = true;
+        }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, move_pos[1].position, move_speed);
+            SR.flipX = true;
+            
+            if (transform.position == move_pos[1].position)
+                is_return = false;
+        }
 
-        if (Mathf.Abs(player.transform.position.x - transform.position.x) <= AttackRange && Go != null)
-            Go();
-        if (rayhit.collider == null)
-            rigid.velocity = new Vector2(0, rigid.velocity.y);
+
+        if (player != null)
+        {
+            Dir = System.Math.Sign((player.transform.position - transform.position).x);
+            if (Dir == 1)
+                transform.eulerAngles = new Vector3(0, 180, 0);
+            else if (Dir == -1)
+                transform.eulerAngles = new Vector3(0, 0, 0);
+            rigid.velocity = new Vector2(Dir * move_speed, rigid.velocity.y);
+
+            Vector2 front = new Vector2(Center.transform.position.x + Dir, Center.transform.position.y);
+            RaycastHit2D rayhit = Physics2D.Raycast(front, Vector2.down, 1, LayerMask.GetMask("Block"));
+            Debug.DrawRay(front, Vector2.down, Color.green);
+
+            if (Mathf.Abs(player.transform.position.x - transform.position.x) <= AttackRange && Go != null)
+                Go();
+            if (rayhit.collider == null)
+                rigid.velocity = new Vector2(0, rigid.velocity.y);
+        }
     }
 }
