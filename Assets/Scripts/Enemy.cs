@@ -105,8 +105,8 @@ public class Enemy : MonoBehaviour
 
             if (Mathf.Abs(player.transform.position.x - transform.position.x) <= AttackRange && Go != null)
                 Go();
-            if (rayhit.collider == null)
-                rigid.velocity = new Vector2(0, rigid.velocity.y);
+            //if (rayhit.collider == null)
+                //rigid.velocity = new Vector2(0, rigid.velocity.y);
         }
          else
         {
