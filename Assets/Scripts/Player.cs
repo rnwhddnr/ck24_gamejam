@@ -40,7 +40,8 @@ public class Player : MonoBehaviour
     [SerializeField] BoxCollider2D HitRange;
     [SerializeField] SpriteRenderer SR;
     public Canvas canvas;
-    Camera Camera;
+    public Camera Camera;
+    public bool CameraFollow = true;
     GameManager GM;
     Rigidbody2D RG;
     [SerializeField] GameObject WeaponCenter;
@@ -120,7 +121,8 @@ public class Player : MonoBehaviour
     }
     private void LateUpdate()
     {
-        Camera_move();
+        if (CameraFollow)
+            Camera_move();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -146,11 +148,10 @@ public class Player : MonoBehaviour
     IEnumerator Rolling(Vector3 Pos)
     {
         Roll = true;
-        Vector2 Dir = Pos - transform.position;
-        int dir = Math.Sign(Dir.x);
-        RG.velocity = new Vector2(Speed * 2.5f * dir, RG.velocity.y);
+        int dir = Math.Sign((Pos - transform.position).x);
+        RG.velocity = new Vector2(Speed * 3f * dir, RG.velocity.y);
         HitRange.enabled = false;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.25f);
         HitRange.enabled = true;
         RG.velocity = new Vector2(0, RG.velocity.y);
         yield return new WaitForSeconds(0.1f);

@@ -66,7 +66,7 @@ public class Tutorial : MonoBehaviour
             }
         }
         ChatBox.Chat(Player.transform.position + new Vector3(0, 2.5f) - transform.position);
-        StartCoroutine(CameraShake(TutoCamera, 0.05f, 1f, TutoCamera.transform.position));
+        GameManager.instance.StartCoroutine(GameManager.instance.CameraShake(TutoCamera, 0.05f, 1f, TutoCamera.transform.position));
         while (true)
         {
             yield return null;
@@ -76,7 +76,7 @@ public class Tutorial : MonoBehaviour
             }
         }
         ChatBox.Chat(Player.transform.position + new Vector3(0, 2.5f) - transform.position);
-        StartCoroutine(CameraShake(TutoCamera, 0.08f, 1f, TutoCamera.transform.position));
+        GameManager.instance.StartCoroutine(GameManager.instance.CameraShake(TutoCamera, 0.08f, 1f, TutoCamera.transform.position));
         while (true)
         {
             yield return null;
@@ -91,7 +91,7 @@ public class Tutorial : MonoBehaviour
         yield return new WaitForSeconds(1f);
         ChatBox.Chat(Player.transform.position + new Vector3(0, 2.5f) - transform.position);
         yield return new WaitForSeconds(1f);
-        StartCoroutine(CameraShake(TutoCamera, 0.12f, 1.5f, TutoCamera.transform.position));
+        GameManager.instance.StartCoroutine(GameManager.instance.CameraShake(TutoCamera, 0.12f, 1.5f, TutoCamera.transform.position));
         yield return new WaitForSeconds(1.5f);
         ChatBox.Chat(Player.transform.position + new Vector3(0, 2.5f) - transform.position);//Æ÷Å» ¿­¸²
         Portal.SetActive(true);
@@ -292,16 +292,5 @@ public class Tutorial : MonoBehaviour
         Destroy(OBJ);
         GameManager.instance.Data.Tutorial = true;
         yield return null;
-    }
-    IEnumerator CameraShake(Camera camera, float Power, float ShakeTime, Vector3 BeforePos)
-    {
-        float T = 0;
-        while (T < ShakeTime)
-        {
-            T += Time.deltaTime;
-            camera.transform.position = Random.insideUnitSphere * Power + BeforePos;
-            yield return null;
-        }
-        camera.transform.position = BeforePos;
     }
 }

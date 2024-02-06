@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] GameObject Item;
-    [SerializeField] GameObject Center;
+    public GameObject Center;
 
     public bool Attacked;
     public float AttackRange;

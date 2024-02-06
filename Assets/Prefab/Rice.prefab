@@ -225,7 +225,7 @@ MonoBehaviour:
   AttackRange: 4.5
   SR: {fileID: 0}
   move_speed: 1
-  rigid: {fileID: 0}
+  rigid: {fileID: 4792915116168791737}
   hp: 1
   Attack: 1
   player: {fileID: 0}

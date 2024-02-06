@@ -100,4 +100,15 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(Data.SceneName);
         }
     }
+    public IEnumerator CameraShake(Camera camera, float Power, float ShakeTime, Vector3 BeforePos)
+    {
+        float T = 0;
+        while (T < ShakeTime)
+        {
+            T += Time.deltaTime;
+            camera.transform.position = Random.insideUnitSphere * Power + BeforePos;
+            yield return null;
+        }
+        camera.transform.position = BeforePos;
+    }
 }

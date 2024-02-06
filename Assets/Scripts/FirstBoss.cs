@@ -4,59 +4,103 @@ using UnityEngine;
 
 public class FirstBoss : MonoBehaviour
 {
-    Player player;
     Enemy Enemy;
-    int AttackDir;
+    Animator animator;
+    [SerializeField] string[] OnePattern = { "LeftHandAttack", "RightHandAttack" };
+    [SerializeField] string[] TwoPattern = { "DownClap", "UpClap" };
+    [SerializeField] string[] HeadPattern = { "HeadBanging" };
+    WaitForSeconds WaitForSeconds=new WaitForSeconds(5);
+    [SerializeField] GameObject[] Monsters = new GameObject[5];
     private void Awake()
     {
         Enemy = GetComponent<Enemy>();
-        player = GameObject.Find("Player").GetComponent<Player>();
+        animator = GetComponent<Animator>();
     }
-    private void Start()
+    IEnumerator Start()
     {
-        StartCoroutine(First());
-    }
-    IEnumerator First()
-    {
-        while (Vector3.Distance(transform.position, player.transform.position + Vector3.up * 3) > 0.1f)
+        while (true)
         {
             yield return null;
-            transform.position = Vector3.MoveTowards(transform.position, player.transform.position + Vector3.up * 3, Enemy.move_speed * Time.deltaTime);
+            if (animator.GetBool("End"))
+                break;
         }
-        int i = Random.Range(0, 1);
-        if (i == 1)
-            AttackDir = 1;
+        while(true)
+        {
+            yield return WaitForSeconds;
+            int i=Random.Range(0, 10);
+            if (i >= 8)
+                Head();
+            else if (i >= 5)
+                Two();
+            else
+                One();
+        }
+    }
+    void One()
+    {
+        int i=Random.Range(0, OnePattern.Length);
+        TriggerOn(OnePattern[i]);
+        animator.SetBool("Idle", true);
+    }
+    void Two()
+    {
+        int i = Random.Range(0, 100);
+        if(i<45)
+        {
+            TriggerOn(TwoPattern[1]);
+        }
         else
-            AttackDir = -1;
-        StartCoroutine(Second());
+            TriggerOn(TwoPattern[0]);
+        animator.SetBool("Idle", true);
     }
-    IEnumerator Second()
+    void Head()
     {
-        yield return new WaitForSeconds(1);
-        StartCoroutine(Third());
+        TriggerOn(HeadPattern[0]);
+        animator.SetBool("Idle", true);
     }
-    IEnumerator Third()
+    void TriggerOn(string TriggerName)
     {
-        Vector3 Target = player.transform.position + (Vector3.left * AttackDir * 3);
-        while (Vector3.Distance(transform.position, Target) > 0.1f)
+        animator.SetTrigger(TriggerName);
+    }
+    public void BOOL()
+    {
+        animator.SetBool("GroundAttack", true);
+    }
+    public void End()
+    {
+        animator.SetBool("End", true);
+    }
+    public void AttackEnd()
+    {
+        animator.SetBool("Idle", true);
+    }
+    public void AttackStart()
+    {
+        animator.SetBool("Idle", false);
+    }
+    public void Mobspawn()
+    {
+        for(int i = 0; i < 2; i++)
         {
-            yield return null;
-            transform.position = Vector3.MoveTowards(transform.position, Target, Enemy.move_speed * Time.deltaTime);
+            int a=Random.Range(0, 10);
+            GameObject OBJ = null;
+            if (a >= 9)
+                OBJ = Instantiate(Monsters[0], Enemy.Center.transform.position, Quaternion.identity);
+
+            else if (a >= 7)
+                OBJ = Instantiate(Monsters[1], Enemy.Center.transform.position, Quaternion.identity);
+
+            else if(a >= 5)
+                OBJ = Instantiate(Monsters[2], Enemy.Center.transform.position, Quaternion.identity);
+
+            else if (a >= 3)
+                OBJ = Instantiate(Monsters[3], Enemy.Center.transform.position, Quaternion.identity);
+
+            else
+                OBJ = Instantiate(Monsters[4], Enemy.Center.transform.position, Quaternion.identity);
+
+            if (OBJ != null)
+                OBJ.GetComponent<Rigidbody2D>().velocity = new Vector2((i - 1) * 3, 0);
         }
-        yield return new WaitForSeconds(1.5f);
-        StartCoroutine(Fourth());
-    }
-    IEnumerator Fourth()
-    {
-        Vector2 Dir = player.transform.position - transform.position;
-        int dir = System.Math.Sign(Dir.x);
-        Vector3 Target = player.transform.position + (Vector3.left * (-dir) * 3);
-        while (Vector3.Distance(transform.position, Target) > 0.01f)
-        {
-            yield return null;
-            transform.position = Vector3.MoveTowards(transform.position, Target, Enemy.move_speed * Time.deltaTime * 2f);
-        }
-        yield return new WaitForSeconds(3);
-        StartCoroutine (First());
     }
 }
