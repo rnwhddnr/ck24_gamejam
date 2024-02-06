@@ -15,7 +15,8 @@ public class Shop_interact : MonoBehaviour
 
     [SerializeField] Camera cut_cam;
     [SerializeField] Camera main_cam;
-
+    [SerializeField] Transform pos;
+    private bool bb;
     private void Start()
     {
         GetComponent<Interaction>().interact += active_choose;
@@ -64,28 +65,35 @@ public class Shop_interact : MonoBehaviour
         shop.End_shop();
     }
 
+    private void Update()
+    {
+        if (bb)
+            FindObjectOfType<Player>().transform.position = new Vector2(-22, -2);
+
+    }
+
     public void Button_start_sale()
     {
-        Vector3 pos = Vector3.Lerp(Camera.main.transform.position, new Vector3(-4, -1, -10), 10 * Time.deltaTime);
-        Camera.main.transform.position = new Vector3(pos.x, pos.y, -10f);
-
         GameManager.instance.Can_move = false;
-        FindObjectOfType<Player>().canvas.gameObject.SetActive(false);
-        
+        Player player = FindObjectOfType<Player>();
+        player.canvas.gameObject.SetActive(false);
+        player.transform.position = new Vector2(-22, -2);
+        player.cant_cam = true;
+
+        bb = true;
         cut_cam.enabled = true;
         main_cam.enabled = false;
+
         cut_cam.transform.position = main_cam.transform.position; 
 
         Inven_manager.instance.shop.gameObject.layer = 0;
         ran_count = Random.Range(4, 7);
-        StartCoroutine(cammove(false));
+        cut_cam.orthographicSize = 5;
         spwan_customer();
 
         choose_obj.SetActive(false);
 
-        GameObject player = GameObject.Find("Player");
         player.transform.position = transform.parent.GetChild(0).position;
-        player.transform.GetChild(0).gameObject.SetActive(false);
         player.transform.GetChild(1).gameObject.SetActive(false);
     }
 
@@ -98,34 +106,14 @@ public class Shop_interact : MonoBehaviour
         main_cam.enabled = true;
         main_cam.transform.position = cut_cam.transform.position;
 
-        StartCoroutine(cammove(true));
-
         Inven_manager.instance.shop.gameObject.layer = 9;
         choose_obj.SetActive(false);
+        bb = false;
 
         GameObject player = GameObject.Find("Player");
-        player.transform.GetChild(0).gameObject.SetActive(true);
         player.transform.GetChild(1).gameObject.SetActive(true);
-    }
 
-    IEnumerator cammove(bool is_return)
-    {
-        if (is_return)
-        {
-            for (float i = cut_cam.orthographicSize; i > 4; i -= 0.01f)
-            {
-                cut_cam.orthographicSize = i;
-                yield return new WaitForSeconds(0.05f);
-            }
-        }
-        else
-        {
-            for (float i = cut_cam.orthographicSize; i < 5; i += 0.01f)
-            {
-                cut_cam.orthographicSize = i;
-                yield return new WaitForSeconds(0.05f);
-            }
-        }
+        player.GetComponent<Player>().cant_cam = false;
     }
 
     public void spwan_customer()

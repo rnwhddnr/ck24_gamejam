@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System;
 
@@ -23,9 +24,13 @@ public class customer : MonoBehaviour
     public struct strings_
     {
         public string[] text;
+        public string cant_buy_string;
+        public Sprite image;
+        public Sprite[] ani;
     }
     public strings_[] strings;
-    public strings_[] cant_buy_string;
+    public float sprite_speed;
+    private bool is_play;
 
     private void Start()
     {
@@ -35,13 +40,25 @@ public class customer : MonoBehaviour
         target = Inven_manager.instance.shop.transform.Find("target");
         End_target = Inven_manager.instance.shop.transform.Find("End_target");
         ran_text = UnityEngine.Random.Range(0, strings.Length);
+
+        transform.parent.GetComponent<SpriteRenderer>().sprite = strings[ran_text].image;
+
     }
 
     private void Update()
     {
         if (!is_end)
         {
-            transform.parent.position = Vector2.MoveTowards(transform.parent.position, target.position, speed * Time.deltaTime);
+            if (transform.parent.position == target.position)
+            {
+                is_play = false;
+            }
+            else
+            {
+                transform.parent.position = Vector2.MoveTowards(transform.parent.position, target.position, speed * Time.deltaTime);
+                is_play = true;
+                StartCoroutine(play());
+            }
         }
         else
         {
@@ -52,7 +69,22 @@ public class customer : MonoBehaviour
             }
             else
             {
+                is_play = true;
+                StartCoroutine(play());
                 transform.parent.position = Vector2.MoveTowards(transform.parent.position, End_target.position, speed * Time.deltaTime);
+            }
+        }
+    }
+
+    IEnumerator play()
+    {
+        while (is_play)
+        {
+            for (int i = 0; i < strings[ran_text].ani.Length; i++)
+            {
+                Debug.Log("!!");
+                transform.parent.GetComponent<SpriteRenderer>().sprite = strings[ran_text].ani[i];
+                yield return new WaitForSeconds(sprite_speed);
             }
         }
     }
@@ -69,8 +101,8 @@ public class customer : MonoBehaviour
         if (!Inven_manager.instance.shop.Food_items.Contains(buy_item))
         {
             textMesh.enabled = true;
-            cant_buy_string[ran_text].text[0] = cant_buy_string[ran_text].text[0].Replace("(item)", buy_item.Item_Name);
-            textMesh.text = cant_buy_string[ran_text].text[0];
+            
+            textMesh.text = strings[ran_text].cant_buy_string.Replace("(item)", buy_item.Item_Name);
             is_end = true;
             return;
         }

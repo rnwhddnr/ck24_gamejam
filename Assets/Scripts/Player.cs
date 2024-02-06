@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     private bool NowJump;
     
     public float Speed;
+    [HideInInspector] public bool cant_cam;
+    [HideInInspector] public bool freez;
 
     private int maxhp;
     public int MaxHp
@@ -102,12 +104,14 @@ public class Player : MonoBehaviour
         if (!GM.Can_interact)
         {
             RG.velocity = Vector2.zero;
+            RG.gravityScale = 0;
             if (!GM.Can_move)
             {
                 Interact();
             }
             return;
-        }        
+        }
+        RG.gravityScale = 1;
 
         //±¸¸£±â
         RaycastHit2D hit = Physics2D.BoxCast(transform.position, new Vector2(1, 1), 0, Vector2.down, 0.52f, 1 << 3);
@@ -242,6 +246,9 @@ public class Player : MonoBehaviour
 
     void Camera_move()
     {
+        if (cant_cam)
+            return;
+
         Vector3 pos = Vector3.Lerp(Camera.transform.position, transform.position + (Vector3.up * 2), camera_speed * Time.deltaTime);
         Camera.transform.position = new Vector3(pos.x, pos.y, -10f);
     }

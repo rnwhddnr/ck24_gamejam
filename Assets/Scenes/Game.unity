@@ -9718,14 +9718,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3807769408000591449, guid: b44011315fe97fd48afb3f239696c613, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 971744326}
-    - target: {fileID: 7447143218684230994, guid: b44011315fe97fd48afb3f239696c613, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 9163463560267334225, guid: b44011315fe97fd48afb3f239696c613, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -9773,26 +9765,6 @@ PrefabInstance:
     - target: {fileID: 9163463560267334227, guid: b44011315fe97fd48afb3f239696c613, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 9163463560267334227, guid: b44011315fe97fd48afb3f239696c613, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9163463560267334236, guid: b44011315fe97fd48afb3f239696c613, type: 3}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9163463560267334236, guid: b44011315fe97fd48afb3f239696c613, type: 3}
-      propertyPath: camera_speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9163463560955187516, guid: b44011315fe97fd48afb3f239696c613, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9163463560955187516, guid: b44011315fe97fd48afb3f239696c613, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b44011315fe97fd48afb3f239696c613, type: 3}
