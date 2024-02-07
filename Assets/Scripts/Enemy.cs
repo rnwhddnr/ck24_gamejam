@@ -14,8 +14,11 @@ public class Enemy : MonoBehaviour
     public AttackStart Go;
     [Space(10f)]
     public float move_speed;
-    [SerializeField] Transform[] move_pos;
+    [SerializeField] float[] move_pos = new float[2];
+    Vector2 StartPosition;
+    bool CheckPlayer;
     private bool is_return;
+    public bool CanMove = true;
 
     public Rigidbody2D rigid;
     public int hp;
@@ -41,6 +44,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] bool CommonMob = true;
     private void Awake()
     {
+        StartPosition = transform.position;
         rigid = GetComponent<Rigidbody2D>();
         SR = GetComponent<SpriteRenderer>();
         if (CommonMob)
@@ -51,16 +55,10 @@ public class Enemy : MonoBehaviour
         while (true) 
         {
             yield return null;
-            Move();
+            if (CanMove)
+                Move();
         }
-        //보스도Enemy.cs의 스탯들좀 쓰기위해 분리시켰어요.
     }
-    /*
-    private void FixedUpdate()
-    {
-        Move();
-    }
-    */
     private void Destroy_enemy()
     {
         if (Item != null)
@@ -73,12 +71,18 @@ public class Enemy : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Detect"))
+        {
             player = null;
+            StartCoroutine(checkPlayer());
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Detect") && !Attacked)
+        {
             player = collision.transform.root.GetComponent<Player>();
+            CheckPlayer = true;
+        }
         if (collision.CompareTag("Player"))
         {
             Player player = collision.transform.root.GetComponent<Player>();
@@ -89,7 +93,6 @@ public class Enemy : MonoBehaviour
     }
     private void Move()
     {
-
         if (player != null)
         {
             Dir = System.Math.Sign((player.transform.position - transform.position).x);
@@ -99,33 +102,36 @@ public class Enemy : MonoBehaviour
                 transform.eulerAngles = new Vector3(0, 0, 0);
             rigid.velocity = new Vector2(Dir * move_speed, rigid.velocity.y);
 
-            Vector2 front = new Vector2(Center.transform.position.x + Dir, Center.transform.position.y);
-            RaycastHit2D rayhit = Physics2D.Raycast(front, Vector2.down, 1, LayerMask.GetMask("Block"));
-            Debug.DrawRay(front, Vector2.down, Color.green);
-
             if (Mathf.Abs(player.transform.position.x - transform.position.x) <= AttackRange && Go != null)
                 Go();
-            //if (rayhit.collider == null)
-                //rigid.velocity = new Vector2(0, rigid.velocity.y);
         }
-         else
+        else if(!CheckPlayer)
         {
+            if (move_pos.Length == 0)
+                return;
             if (!is_return)
             {
-                transform.position = Vector2.MoveTowards(transform.position, move_pos[0].position, move_speed);
-                SR.flipX = false;
+                rigid.velocity = new Vector2(move_speed * -1, rigid.velocity.y);
+                transform.eulerAngles = new Vector3(0, 0, 0);
 
-                if (transform.position == move_pos[0].position)
+                if (Vector2.Distance(transform.position, new Vector2(StartPosition.x+move_pos[0], transform.position.y)) < 0.05f)
                     is_return = true;
             }
             else
             {
-                transform.position = Vector2.MoveTowards(transform.position, move_pos[1].position, move_speed);
-                SR.flipX = true;
+                rigid.velocity = new Vector2(move_speed, rigid.velocity.y);
+                transform.eulerAngles = new Vector3(0, 180, 0);
 
-                if (transform.position == move_pos[1].position)
+                if (Vector2.Distance(transform.position, new Vector2(StartPosition.x + move_pos[1], transform.position.y)) < 0.05f)
                     is_return = false;
             }
         }
+    }
+    IEnumerator checkPlayer()
+    {
+        yield return new WaitForSeconds(3);
+        CheckPlayer = false;
+        if(move_pos.Length != 0)
+            is_return = Vector2.Distance(transform.position, new Vector2(StartPosition.x + move_pos[1], transform.position.y)) > Vector2.Distance(transform.position, new Vector2(StartPosition.x + move_pos[0], transform.position.y));
     }
 }

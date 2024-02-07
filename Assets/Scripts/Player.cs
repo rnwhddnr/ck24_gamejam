@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 
     public int JumpCount = 1;
     public int MaxJumpCount = 1;
-    public int JumpPower = 5;
+    public float JumpPower = 5;
     private bool NowJump;
     
     public float Speed;
@@ -186,35 +186,31 @@ public class Player : MonoBehaviour
     {
         Attacked = false;
         PolygonCollider.enabled = false;
-        Animator.SetTrigger("End");
     }
     void Move()
     {
         if (!Knockback)
             RG.velocity = new Vector2(0, RG.velocity.y);
         float XMove = 0;
+        Animator.SetBool("is_move", false);
         if (Input.GetKey(GM.OperationKey["RightMove"]))
         {
-            transform.localScale = new Vector3(1, 1, 1);
             transform.rotation = Quaternion.identity;
+            transform.eulerAngles = new Vector3(0, 0, 0);
 
             Animator.SetBool("is_move", true);
 
             XMove += 1 * Speed;
-            //transform.eulerAngles = new Vector3(0, 0, 0);
         }
         else if (Input.GetKey(GM.OperationKey["LeftMove"]))
         {
-            transform.localScale = new Vector3(-1, 1, 1);
             transform.rotation = Quaternion.identity;
+            transform.eulerAngles = new Vector3(0, 180, 0);
 
             Animator.SetBool("is_move", true);
 
             XMove -= 1 * Speed;
-            //transform.eulerAngles = new Vector3(0, 180, 0);
         }
-        else
-            Animator.SetBool("is_move", false);
 
         if (XMove != 0 && !Knockback)
             RG.velocity = new Vector2(XMove, RG.velocity.y);
@@ -222,7 +218,13 @@ public class Player : MonoBehaviour
         {
             if (JumpCount > 0)
             {
-                RG.velocity += new Vector2(0, JumpPower);
+                if (RG.velocity.y > 0)
+                    RG.velocity += new Vector2(0, JumpPower);
+                else
+                {
+                    RG.velocity = new Vector2(RG.velocity.x, 0);
+                    RG.velocity += new Vector2(0, JumpPower);
+                }
                 JumpCount--;
                 NowJump = true;
 

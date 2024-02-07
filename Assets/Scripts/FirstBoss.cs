@@ -9,7 +9,7 @@ public class FirstBoss : MonoBehaviour
     [SerializeField] string[] OnePattern = { "LeftHandAttack", "RightHandAttack" };
     [SerializeField] string[] TwoPattern = { "DownClap", "UpClap" };
     [SerializeField] string[] HeadPattern = { "HeadBanging" };
-    WaitForSeconds WaitForSeconds=new WaitForSeconds(5);
+    WaitForSeconds WaitForSeconds=new WaitForSeconds(3.5f);
     [SerializeField] GameObject[] Monsters = new GameObject[5];
     private void Awake()
     {
@@ -80,7 +80,7 @@ public class FirstBoss : MonoBehaviour
     }
     public void Mobspawn()
     {
-        for(int i = 0; i < 2; i++)
+        for(int i = 0; i < 5; i++)
         {
             int a=Random.Range(0, 10);
             GameObject OBJ = null;
@@ -100,7 +100,7 @@ public class FirstBoss : MonoBehaviour
                 OBJ = Instantiate(Monsters[4], Enemy.Center.transform.position, Quaternion.identity);
 
             if (OBJ != null)
-                OBJ.GetComponent<Rigidbody2D>().velocity = new Vector2((i - 1) * 3, 0);
+                OBJ.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-1, 1) * 7, 0);
         }
     }
 }

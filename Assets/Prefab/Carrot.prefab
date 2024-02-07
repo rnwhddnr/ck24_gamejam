@@ -197,8 +197,10 @@ MonoBehaviour:
   Attacked: 0
   AttackRange: 4.5
   SR: {fileID: 0}
-  move_speed: 0.03
-  move_pos: []
+  move_speed: 1.5
+  move_pos:
+  - 0
+  - 0
   rigid: {fileID: 2043606167328850783}
   hp: 2
   Attack: 2
@@ -334,7 +336,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0, y: 0.30388737}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -345,5 +347,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 2}
+  m_Size: {x: 10, y: 0.4901762}
   m_EdgeRadius: 0

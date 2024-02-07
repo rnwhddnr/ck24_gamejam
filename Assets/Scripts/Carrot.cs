@@ -26,6 +26,7 @@ public class Carrot : MonoBehaviour
     }
     IEnumerator Charge()
     {
+        Enemy.CanMove = false;
         Enemy.rigid.velocity = new Vector2(0, 0);
         for (int i = 0; i < ChargeSprite.Length; i++)
         {
@@ -60,6 +61,7 @@ public class Carrot : MonoBehaviour
             Enemy.SR.sprite = UpSprite[i];
         }
         Enemy.SR.sprite = DefaultSprite;
+        Enemy.CanMove = true;
         Enemy.Attacked = false;
     }
 }

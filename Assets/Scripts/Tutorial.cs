@@ -15,6 +15,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] GameObject ChatBoxPrefab;
     [SerializeField] GameObject Camerapoint;
     ChatBox ChatBox;
+    [SerializeField] GameObject PressF;
     private void Start()
     {
         if (skip)
@@ -44,6 +45,7 @@ public class Tutorial : MonoBehaviour
     }
     IEnumerator StartTutorial()
     {
+        PressF.SetActive(false);
         GameManager.instance.Can_interact = false;
         Player.transform.GetChild(1).transform.gameObject.SetActive(false);
         Portal.SetActive(false);
@@ -54,8 +56,9 @@ public class Tutorial : MonoBehaviour
         while (Vector3.Distance(TutoCamera.transform.position, new Vector3(Camerapoint.transform.position.x, Camerapoint.transform.position.y, -10)) > 0.1f)
         {
             yield return null;
-            TutoCamera.transform.position = Vector3.Lerp(TutoCamera.transform.position, new Vector3(Camerapoint.transform.position.x, Camerapoint.transform.position.y, -10), 10f * Time.deltaTime);
+            TutoCamera.transform.position = Vector3.Lerp(TutoCamera.transform.position, new Vector3(Camerapoint.transform.position.x, Camerapoint.transform.position.y, -10), 0.5f * Time.deltaTime);
         }
+        PressF.SetActive(true);
         ChatBox.Chat(Player.transform.position + new Vector3(0, 2.5f) - transform.position);
         while (true)
         {
@@ -65,6 +68,7 @@ public class Tutorial : MonoBehaviour
                 break;
             }
         }
+        Destroy(PressF);
         ChatBox.Chat(Player.transform.position + new Vector3(0, 2.5f) - transform.position);
         GameManager.instance.StartCoroutine(GameManager.instance.CameraShake(TutoCamera, 0.05f, 1f, TutoCamera.transform.position));
         while (true)
